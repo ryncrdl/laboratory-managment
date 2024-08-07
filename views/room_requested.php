@@ -158,14 +158,13 @@
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<table class="table table-bordered tbl_return">
+						<table class="table table-bordered room_tbl_completed">
 							<thead>
 								<tr>
-									<th>Borrower Name</th>
-									<th>Returned Items</th>
-									<th>Borrowed Date</th>
-									<th>Returned Date</th>
-									
+									<th>Requested By</th>
+									<th>Requested Room</th>
+									<th>Requested Date & Time</th>
+									<th>Completed Date & Time</th>
 								</tr>
 							</thead>
 						</table>

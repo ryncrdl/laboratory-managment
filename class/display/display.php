@@ -619,6 +619,52 @@ class display
 			echo json_encode($data);
 		}
 	}
+	public function display_room_completed()
+	{
+		global $conn;
+		$sql = $conn->prepare('
+        SELECT 
+            room_reservation.*, 
+            member.m_fname, 
+            member.m_lname, 
+            room.rm_name 
+        FROM 
+            room_reservation
+        LEFT JOIN 
+            member ON member.id = room_reservation.m_school_id
+        LEFT JOIN 
+            room ON room.id = room_reservation.assign_room
+        WHERE 
+            room_reservation.status = 3
+        GROUP BY 
+            room_reservation.reservation_code 
+        ORDER BY 
+            room_reservation.reserve_date ASC
+    ');
+
+		$sql->execute();
+		$fetch = $sql->fetchAll();
+		$count = $sql->rowCount();
+		if ($count > 0) {
+			foreach ($fetch as $key => $value) {
+				$date = ($value['r_date'] == 'NULL' || $value['r_date'] == NULL) ? " --- " : date('F d,Y H:i:s A', strtotime($value['r_date']));
+				$date = date('F d, Y H:i:s A', strtotime($value['reserve_date'] . ' ' . $value['reservation_time']));
+				$r_date = date('F d, Y H:i:s A', strtotime($value['r_date']));
+
+				// Prepare the data array
+				$data['data'][] = array(
+					$value['m_fname'] . ' ' . $value['m_lname'],
+					ucwords($value['rm_name']),
+					$date,
+					$r_date,
+				);
+			}
+			echo json_encode($data);
+		} else {
+			$data['data'] = array();
+			echo json_encode($data);
+		}
+	}
 
 	public function pending_reservation()
 	{
@@ -1336,6 +1382,10 @@ switch ($key) {
 
 	case 'display_return';
 		$display->display_return();
+		break;
+
+		case 'display_room_completed';
+		$display->display_room_completed();
 		break;
 
 	case 'pending_reservation';
