@@ -307,6 +307,39 @@ $('.client_reservation').submit(function(e){
 
 });
 
+$('.room_reservation').submit(function(e){
+	e.preventDefault();
+	var frmdata = $(this).serialize()+'&key=addroom_reservation';
+
+	$.ajax({
+		type: "POST",
+		url: "../class/add/add",
+		data: frmdata
+	})
+	.done(function(data){
+		console.log(data);
+		if(data == 1){
+			toastr.success('Successful. Check your reservation status if your reservation was accomodated');
+			$('input[name="reserved_date"]').val('');
+			$('input[name="reserved_time"]').val('');
+			$('select[name="reserve_room"]').val('');
+			$(".room_reservation").find('select').select2('val', 'All');
+			room_tbl_pendingres.ajax.reload(null,false);
+
+		}else if(data == 2){
+			toastr.warning('Your reservation cannot process. You can only make one reservation per day.');
+			$('input[name="reserved_date"]').val('');
+			$('input[name="reserved_time"]').val('');
+			$('select[name="reserve_room"]').val('');
+			$(".room_reservation").find('select').select2('val', 'All');
+			room_tbl_pendingres.ajax.reload(null,false);
+		}else{
+			toastr.error('Your reservation cannot process right now.');
+		}
+	});
+
+});
+
 $('.add_student').click(function(){
 	
 	$('.divedit-member').toggle(effect, options, duration);

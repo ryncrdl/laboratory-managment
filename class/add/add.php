@@ -320,6 +320,30 @@
 				
 			// }
 		}
+		public function addroom_reservation($date,$time,$client_id,$assign_room,$timeLimit)
+		{
+			global $conn;
+			$code = date('mdYhis').''.$client_id;
+			
+			// $sql = $conn->prepare('SELECT * FROM reservation WHERE reservation_code = ?');
+			// $sql->execute(array($code));
+			// $row = $sql->rowCount();
+			// if($row > 0){
+			// 	echo '2';
+			// }else{
+				if($client_id == 0){
+					echo '3';
+				}else{
+						$sql1 = $conn->prepare('INSERT INTO room_reservation(reservation_code,m_school_id,reserve_date,reservation_time,assign_room,time_limit) VALUES(?,?,?,?,?,?)');
+						$sql1->execute(array($code,$client_id,$date,$time,$assign_room,$timeLimit));
+						$count = $sql1->rowCount();
+						echo ($count > 0) ? '1' : '0';
+				}
+			// }
+			// foreach ($items as $key => $value) {
+				
+			// }
+		}
 
 		public function add_newstudent($sid_number,$s_password,$s_fname,$s_lname,$s_gender,$s_contact,$s_email,$s_department,$s_major,$s_year,$s_section)
 		{
@@ -480,6 +504,15 @@
 		$add_function->addclient_reservation($items,$date,$time,$client_id,$assign_room,$timeLimit);
 		break;
 
+		case 'addroom_reservation';
+		$date = $_POST['reserved_date'];
+		$time = $_POST['reserved_time'];
+		$client_id = $_POST['client_id'];
+		$assign_room = $_POST['reserve_room'];
+		$timeLimit = $_POST['time_limit'];
+		$add_function->addroom_reservation($date,$time,$client_id,$assign_room,$timeLimit);
+		break;
+
 		case 'add_newstudent';
 		$sid_number = trim($_POST['sid_number']);
 		$s_password = trim(md5($_POST['s_password']));
@@ -505,14 +538,10 @@
  		$type = 'Faculty';
 		$add_function->add_newfaculty($f_id,$f_fname,$f_lname,$f_gender,$f_contact,$f_department,$type);
 		break;
-		
-
-
-
 	}
 
 
 
-	?>
+?>
 
 

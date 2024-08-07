@@ -24,7 +24,7 @@
 				</a>
 				<ul class="children collapse" id="sub-item-1">
 					
-					<li  class="active-nav">
+					<li >
 						<a class="" href="reservation">
 							<svg class="glyph stroked eye">
 								<use xlink:href="#stroked-eye"/>
@@ -73,7 +73,7 @@
 							Rooms
 						</a>
 					</li>
-					<li>
+					<li  class="active-nav">
 						<a href="room-reservation">
 							<svg class="glyph stroked eye">
 								<use xlink:href="#stroked-eye"/>
@@ -173,13 +173,14 @@
 						<div class="tab-content">
 
 							<div class="tab-pane fade in active" id="pending">
-								<table class="table table-bordered tbl_pendingres">
+								<table class="table table-bordered room_tbl_pendingres">
 									<thead>
 										<tr>
-											<th>Name</th>
-											<th>Items</th>
-											<th>Reservation Date</th>
-											<th>Rooms</th>
+											<!-- Stop on - Creating action functions -->
+											<th>Request By</th>
+											<th>Request Date & Time</th>
+											<th>Requested Date & Time</th>
+											<th>Requested Rooms</th>
 											<th>Action</th>
 										</tr>
 									</thead>

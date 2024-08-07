@@ -9,7 +9,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<title></title>
+	<title>PUP LMS</title>
+	<!-- Logo -->
+	<link rel="shortcut icon" href="../assets/logo.png" type="image/x-icon"/>
 
 	<!-- bootstrap -->
 	<link rel="stylesheet" type="text/css" href="../assets/custom/css/bootstrap.min.css">
@@ -43,7 +45,7 @@
 			padding: 1rem 2rem;
 			background: #800000;
 		}
-		.nav li a, .nav .parent #sub-item-1 li a{
+		.nav li a,  #sub-item-1 li a,  #sub-item-2 li a{
 			color: #800000 !important;
 		}
 		.nav-pills .active a{
@@ -51,11 +53,11 @@
 			color: white !important;
 		}
 
-		.nav .active-nav,  .parent #sub-item-1 .active-nav a{
+		.nav .active-nav,  #sub-item-1 .active-nav a,  #sub-item-2 .active-nav a{
 			background: #800000 !important;
 			color: white !important; 
 		}
-		.nav .active-nav a, .nav .parent #sub-item-1 .active-nav a{
+		.nav .active-nav a,  #sub-item-1 .active-nav a, #sub-item-2 .active-nav a{
 			background: #800000 !important;
 			color: white !important;
 		}

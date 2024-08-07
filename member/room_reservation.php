@@ -45,6 +45,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">Room Reservation</h1>
+						<a href="request_room" style="padding: 1rem 2rem; background: #800000; color: white; border-radius: 0.5rem;">Request Room</a>
 					</div>
 				</div><!--/.row-->
 

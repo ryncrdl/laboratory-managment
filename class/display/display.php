@@ -538,7 +538,6 @@
 				echo 0;
 			}
 		}
-
 		public function display_borrow()
 		{
 			global $conn; 
@@ -656,6 +655,73 @@
 				echo json_encode($data);
 			}
 		}
+		public function pending_room_reservation()
+{
+    global $conn;
+
+    // SQL query to fetch pending room reservations
+    $sql = $conn->prepare('
+        SELECT 
+            room_reservation.*, 
+            member.m_fname, 
+            member.m_lname, 
+            room.rm_name 
+        FROM 
+            room_reservation
+        LEFT JOIN 
+            member ON member.id = room_reservation.m_school_id
+        LEFT JOIN 
+            room ON room.id = room_reservation.assign_room
+        WHERE 
+            room_reservation.status = ?
+        GROUP BY 
+            room_reservation.reservation_code 
+        ORDER BY 
+            room_reservation.reserve_date ASC
+    ');
+
+    // Execute the query with status 0 (pending)
+    $sql->execute(array(0));
+    $fetch = $sql->fetchAll();
+    $count = $sql->rowCount();
+
+    $data = array();
+
+    // Check if there are results
+    if ($count > 0) {
+        foreach ($fetch as $value) {
+            // Prepare the action buttons
+            $button = "<button class='btn btn-primary btn-accept' data-id='" . $value['reservation_code'] . "'>
+                        Accept
+                        <i class='fa fa-chevron-right'></i>
+                       </button>
+                       <button class='btn btn-danger btn-cancel' data-id='" . $value['reservation_code'] . "'>
+                        Cancel
+                        <i class='fa fa-remove'></i>
+                       </button>";
+
+            // Format the reservation date and time
+            $date = date('F d, Y H:i:s A', strtotime($value['reserve_date'] . ' ' . $value['reservation_time']));
+			$r_date = date('F d, Y H:i:s A', strtotime($value['r_date']));
+
+            // Prepare the data array
+            $data['data'][] = array(
+                $value['m_fname'] . ' ' . $value['m_lname'], 
+                $date, 
+                $r_date, 
+                ucwords($value['rm_name']), 
+                $button
+            );
+        }
+    } else {
+        // No results, prepare empty data array
+        $data['data'] = array();
+    }
+
+    // Return the data as JSON
+    echo json_encode($data);
+}
+
 
 		public function accept_reservation()
 		{
@@ -1239,6 +1305,10 @@
 
 		case 'pending_reservation';
 		$display->pending_reservation();
+		break;
+
+		case 'pending_room_reservation';
+		$display->pending_room_reservation();
 		break;
 
 		case 'accept_reservation';

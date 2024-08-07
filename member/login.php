@@ -6,7 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<title></title>
+	<title>PUP LMS | Member Login</title>
+	<!-- Logo -->
+	<link rel="shortcut icon" href="../assets/logo.png" type="image/x-icon"/>
 
 	<!-- bootstrap -->
 	<link rel="stylesheet" type="text/css" href="../assets/custom/css/bootstrap.min.css">
