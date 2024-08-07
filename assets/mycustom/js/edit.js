@@ -852,31 +852,45 @@ tbl_pendingres.on('click', 'button.btn-accept', function(e){
 	});
 });
 
+
 tbl_pendingres.on('click', 'button.btn-cancel', function(e){
 	e.preventDefault();
 	var a = $(this).attr('data-id');
 	$('input[name="codereserve"]').val(a);
 
 	$('.modal').modal('show');
-	// $.ajax({
-	// 	type: "POST",
-	// 	url: "../class/edit/edit",
-	// 	data: {
-	// 		key: 'cancel_reservation',
-	// 		code: a
-	// 	}
-	// })
-	// .done(function(data){
-	// 	console.log(data);
-	// 	if(data > 0){
-	// 		toastr.success('Successfully cancelled reservation');
-	// 		tbl_pendingres.ajax.reload(null,false);
-	// 		tbl_reserved.ajax.reload(null,false);
-	// 	}else{
-	// 		toastr.error('Failed to cancel reservation');
-	// 	}
-	// });
 });
+
+room_tbl_pendingres.on('click', 'button.btn-cancel', function(e){
+	e.preventDefault();
+	var a = $(this).attr('data-id');
+	$('input[name="codereserve"]').val(a);
+
+	$('.modal').modal('show');
+});
+
+$('.frm_room_cancelreservation').submit(function(e){
+	e.preventDefault();
+	var ab = $(this).serialize()+'&key=cancel_room_reservation';
+	console.log(ab);
+	$.ajax({
+		type: "POST",
+		url: "../class/edit/edit",
+		data: ab
+	})
+	.done(function(data){
+		console.log(data);
+		$('.modal').modal('hide');
+		if(data > 0){
+			toastr.success('Successfully cancelled reservation');
+			room__tbl_pendingres.ajax.reload(null,false);
+			tbl_reserved.ajax.reload(null,false);
+		}else{
+			toastr.error('Failed to cancel reservation');
+		}
+	});
+});
+
 
 $('.frm_cancelreservation').submit(function(e){
 	e.preventDefault();
@@ -901,10 +915,45 @@ $('.frm_cancelreservation').submit(function(e){
 });
 
 
+room_tbl_pendingres.on('click', 'button.btn-accept', function(e){
+	e.preventDefault();
+	var a = $(this).attr('data-id');
+
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: "../class/edit/edit",
+		data: {
+			key: 'room_reserve',
+			code: a
+		}
+	})
+	.done(function(data){
+		console.log(data);
+		if(data.response == 1){
+			toastr.success('Successfully accepted room reservation');
+			room_tbl_pendingres.ajax.reload(null,false);
+			room_tbl_reserved.ajax.reload(null,false);
+
+			// $.get('../views/printBorrow?borrowIds=' + data.borrowIds, function(htmlData){
+	        //     var w = window.open();
+	        //     w.document.write(htmlData);
+	        //     w.setTimeout(function(){
+	        //         w.print();  
+	        //         w.close();
+	        //     },250);
+	        // });
+
+		}else{
+			toastr.error('Failed to reserve room');
+		}
+	});
+
+});
+
 tbl_reserved.on('click', 'button.borrowreserve', function(e){
 	e.preventDefault();
 	var a = $(this).attr('data-id');
-	
 
 	$.ajax({
 		type: "POST",
@@ -931,6 +980,41 @@ tbl_reserved.on('click', 'button.borrowreserve', function(e){
 	            },250);
 	        });
 
+		}else{
+			toastr.error('Failed to borrow reservation');
+		}
+	});
+
+});
+room_tbl_reserved.on('click', 'button.roomreserve', function(e){
+	e.preventDefault();
+	var a = $(this).attr('data-id');
+	console.log(a);
+
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: "../class/edit/edit",
+		data: {
+			key: 'reserve_room',
+			code: a
+		}
+	})
+	.done(function(data){
+		console.log(data);
+		if(data.response == 1){
+			room_tbl_pendingres.ajax.reload(null,false);
+			room_tbl_reserved.ajax.reload(null,false);
+
+			// $.get('../views/printBorrow?borrowIds=' + data.borrowIds, function(htmlData){
+	        //     var w = window.open();
+	        //     w.document.write(htmlData);
+	        //     w.setTimeout(function(){
+	        //         w.print();  
+	        //         w.close();
+	        //     },250);
+	        // });
+			toastr.success('Successfully reserved room');
 		}else{
 			toastr.error('Failed to borrow reservation');
 		}

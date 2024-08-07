@@ -80,23 +80,15 @@
 					</a>
 				</li>
 				<li>
-					<a href="room-reservation">
+					<a href="room_reservation">
 						<svg class="glyph stroked eye">
 							<use xlink:href="#stroked-eye" />
 						</svg>
 						Reservations
 					</a>
 				</li>
-				<li >
-					<a href="room-occupied">
-						<svg class="glyph stroked download">
-							<use xlink:href="#stroked-download" />
-						</svg>
-						Room Occupied
-					</a>
-				</li>
-				<li class="active-nav">
-					<a href="room-requested">
+				<li>
+					<a href="room_requested">
 						<svg class="glyph stroked checkmark">
 							<use xlink:href="#stroked-checkmark" />
 						</svg>
@@ -146,7 +138,7 @@
 					Users
 				</a>
 			</li>
-			<?php
+			<?php 
 				}
 				($_SESSION['admin_type'] == 1) ? include('include_history.php') : false;
 			 ?>
@@ -158,7 +150,7 @@
 		<div class="row" style="padding-top: 2rem !important;">
 			<ol class="breadcrumb">
 				<li><a href="dashboard" style="color: #800000 !important;"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-				<li class="active">Returned Items</li>
+				<li class="active">Borrowed Items</li>
 			</ol>
 		</div><!--/.row-->
 
@@ -166,14 +158,14 @@
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<table class="table table-bordered tbl_return">
+						<table class="table table-bordered tbl_borrow">
 							<thead>
 								<tr>
 									<th>Borrower Name</th>
-									<th>Returned Items</th>
 									<th>Borrowed Date</th>
-									<th>Returned Date</th>
-									
+									<th>Items Borrowed</th>
+									<th>Room</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 						</table>

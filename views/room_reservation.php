@@ -74,23 +74,16 @@
 						</a>
 					</li>
 					<li  class="active-nav">
-						<a href="room-reservation">
+						<a href="room_reservation">
 							<svg class="glyph stroked eye">
 								<use xlink:href="#stroked-eye"/>
 							</svg>
 							Reservations
 						</a>
 					</li>
+				
 					<li>
-						<a href="room-occupied">
-							<svg class="glyph stroked download">
-								<use xlink:href="#stroked-download"/>
-							</svg>
-							Room Occupied
-						</a>
-					</li>
-					<li>
-						<a href="room-requested">
+						<a href="room_requested">
 							<svg class="glyph stroked checkmark">
 								<use xlink:href="#stroked-checkmark"/>
 							</svg>
@@ -176,7 +169,6 @@
 								<table class="table table-bordered room_tbl_pendingres">
 									<thead>
 										<tr>
-											<!-- Stop on - Creating action functions -->
 											<th>Request By</th>
 											<th>Request Date & Time</th>
 											<th>Requested Date & Time</th>
@@ -188,13 +180,13 @@
 							</div>
 
 							<div class="tab-pane" id="reserved">
-								<table class="table table-bordered tbl_reserved">
+								<table class="table table-bordered room_tbl_reserved">
 									<thead>
 										<tr>
-											<th>Name</th>
-											<th>Items</th>
-											<th>Reservation Date</th>
-											<th>Rooms</th>
+											<th>Request By</th>
+											<th>Request Date & Time</th>
+											<th>Requested Date & Time</th>
+											<th>Requested Rooms</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -213,7 +205,7 @@
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form class="frm_cancelreservation">
+				<form class="frm_room_cancelreservation">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<h4 class="modal-title" id="myModalLabel">Cancel Reservation</h4>

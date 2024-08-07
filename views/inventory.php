@@ -18,13 +18,13 @@
 					Dashboard
 				</a>
 			</li>
-			<li class="parent ">
+			<li class="parent">
 				<a href="#sub-item-1" data-toggle="collapse">
-					<span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Transactions
+					<span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Item Reservation
 				</a>
 				<ul class="children collapse" id="sub-item-1">
 					
-<li>
+					<li>
 						<a class="" href="reservation">
 							<svg class="glyph stroked eye">
 								<use xlink:href="#stroked-eye"/>
@@ -60,6 +60,38 @@
 					</li>
 				</ul>
 			</li>
+			<li class="parent">
+				<a href="#sub-item-2" data-toggle="collapse">
+					<span data-toggle="collapse" href="#sub-item-2"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Room Reservation
+				</a>
+				<ul class="children collapse" id="sub-item-2">
+					<li>
+						<a href="room">
+							<svg class="glyph stroked plus sign">
+								<use xlink:href="#stroked-plus-sign"/>
+							</svg>
+							Rooms
+						</a>
+					</li>
+					<li>
+						<a href="room_reservation">
+							<svg class="glyph stroked eye">
+								<use xlink:href="#stroked-eye"/>
+							</svg>
+							Reservations
+						</a>
+					</li>
+				
+					<li>
+						<a href="room_requested">
+							<svg class="glyph stroked checkmark">
+								<use xlink:href="#stroked-checkmark"/>
+							</svg>
+							Room Requested
+						</a>
+					</li>
+				</ul>
+			</li>
 			<?php if($_SESSION['admin_type'] == 1){ ?>
 			<li>
 				<a href="items">
@@ -75,14 +107,6 @@
 						<use xlink:href="#stroked-male-user"/>
 					</svg>
 					Borrowers
-				</a>
-			</li>
-			<li>
-				<a href="room">
-					<svg class="glyph stroked app-window">
-						<use xlink:href="#stroked-app-window"></use>
-					</svg>
-					Rooms
 				</a>
 			</li>
 			<li  class="active-nav">

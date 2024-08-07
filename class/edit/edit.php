@@ -401,6 +401,27 @@
 				echo $addrow;
 			}
 		}
+		public function accept_pending_reservation($code)
+		{
+			global $conn;
+
+			session_start();
+			$h_desc = 'accept client reservation';
+			$h_tbl = 'reservation';
+			$sessionid = $_SESSION['admin_id'];
+			$sessiontype = $_SESSION['admin_type'];
+
+			$sql = $conn->prepare('UPDATE reservation SET status = ? WHERE reservation_code = ?');
+			$sql->execute(array(1,$code));
+			$row = $sql->rowCount();
+			if($row > 0){
+				$add = $conn->prepare('INSERT INTO reservation_status (reservation_code, remark, res_status) VALUES(?,?,?)');
+				$add->execute(array($code,'Accepted Reservation',1));
+				$addrow = $add->rowCount();
+
+				echo $addrow;
+			}
+		}
 
 		public function cancel_reservation($remarks_cancel,$codereserve)
 		{
@@ -417,6 +438,27 @@
 			$row = $sql->rowCount();
 			if($row > 0){
 				$add = $conn->prepare('INSERT INTO reservation_status (reservation_code, remark, res_status) VALUES(?,?,?)');
+				$add->execute(array($codereserve,$remarks_cancel,2));
+				$addrow = $add->rowCount();
+
+				echo $addrow;
+			}
+		}
+		public function cancel_room_reservation($remarks_cancel,$codereserve)
+		{
+			global $conn;
+
+			session_start();
+			$h_desc = 'cancel member reservation';
+			$h_tbl = 'room_reservation';
+			$sessionid = $_SESSION['admin_id'];
+			$sessiontype = $_SESSION['admin_type'];
+
+			$sql = $conn->prepare('UPDATE room_reservation SET status = ? WHERE reservation_code = ?');
+			$sql->execute(array(2,$codereserve));
+			$row = $sql->rowCount();
+			if($row > 0){
+				$add = $conn->prepare('INSERT INTO room_reservation_status (reservation_code, remark, res_status) VALUES(?,?,?)');
 				$add->execute(array($codereserve,$remarks_cancel,2));
 				$addrow = $add->rowCount();
 
@@ -465,6 +507,42 @@
 			
 		}
 
+		public function room_reserve($code)
+		{
+			global $conn;
+
+			session_start();
+			$sessionid = $_SESSION['admin_id'];
+
+			$up = $conn->prepare('UPDATE room_reservation SET status = ? WHERE reservation_code = ? ');
+			$up->execute(array(1,$code));
+			$num = $up->rowCount();
+			if($num > 0){
+				echo json_encode(array("response" => 1));
+			}
+			else{
+				echo json_encode(array("response" => 0));
+			}
+
+		}
+		public function reserve_room($code)
+		{
+			global $conn;
+
+			session_start();
+			$sessionid = $_SESSION['admin_id'];
+
+			$up = $conn->prepare('UPDATE room_reservation SET status = ? WHERE reservation_code = ? ');
+			$up->execute(array(3,$code));
+			$num = $up->rowCount();
+			if($num > 0){
+				echo json_encode(array("response" => 1));
+			}
+			else{
+				echo json_encode(array("response" => 0));
+			}
+
+		}
 		public function borrowreserve($code)
 		{
 			global $conn;
@@ -656,10 +734,23 @@
 		$edit->cancel_reservation($remarks_cancel,$codereserve);
 		break;
 
+		case 'cancel_room_reservation';
+		$remarks_cancel = $_POST['remarks_cancel'];
+		$codereserve = $_POST['codereserve'];
+		$edit->cancel_room_reservation($remarks_cancel,$codereserve);
+		break;
+
 		case 'transfer_item';
 		$edit->transfer_item();
 		break;
 
+		case 'room_reserve';
+		$code = $_POST['code'];
+		$edit->room_reserve($code);
+		case 'reserve_room';
+		$code = $_POST['code'];
+		$edit->reserve_room($code);
+		break;
 		case 'borrowreserve';
 		$code = $_POST['code'];
 		$edit->borrowreserve($code);

@@ -80,7 +80,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="room-reservation">
+					<a href="room_reservation">
 						<svg class="glyph stroked eye">
 							<use xlink:href="#stroked-eye" />
 						</svg>
@@ -88,15 +88,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="room-occupied">
-						<svg class="glyph stroked download">
-							<use xlink:href="#stroked-download" />
-						</svg>
-						Room Occupied
-					</a>
-				</li>
-				<li>
-					<a href="room-requested">
+					<a href="room_requested">
 						<svg class="glyph stroked checkmark">
 							<use xlink:href="#stroked-checkmark" />
 						</svg>
