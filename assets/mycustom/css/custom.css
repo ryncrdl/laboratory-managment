@@ -1,0 +1,29 @@
+.login-container{
+    background: url(../../bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.login-panel{
+    margin-top: 3rem;
+    padding: 2rem;
+}
+
+.login-panel img{
+    width: 15rem;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 5rem 0rem;
+}
+
+.login-panel .panel-heading{
+    color: #800000;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.container{
+    background-image: url("./assets/bg.jpg");
+    background-size: center center;
+    background-repeat: no-repeat;
+}
