@@ -8,7 +8,9 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li class="">
+		<img src="../assets/logo.png" style="width: 150px; height: 150px; position: relative; left: 50%; transform: translate(-50%);"/>
+			<div class="text-center" style="font-size: 2rem; margin: 1rem 0rem;">Hi, <span class="text-primary" style="color: #800000; font-weight: bold;"><?php echo $_SESSION['admin_name'];?></span></div>
+			<li class="active-nav">
 				<a href="dashboard">
 					<svg class="glyph stroked dashboard-dial">
 						<use xlink:href="#stroked-dashboard-dial"></use>
@@ -16,13 +18,13 @@
 					Dashboard
 				</a>
 			</li>
-			<li class="parent ">
+			<li class="parent">
 				<a href="#sub-item-1" data-toggle="collapse">
-					<span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Transaction 
+					<span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Item Reservation
 				</a>
 				<ul class="children collapse" id="sub-item-1">
 					
-<li>
+					<li>
 						<a class="" href="reservation">
 							<svg class="glyph stroked eye">
 								<use xlink:href="#stroked-eye"/>
@@ -58,13 +60,45 @@
 					</li>
 				</ul>
 			</li>
+			<li class="parent">
+				<a href="#sub-item-2" data-toggle="collapse">
+					<span data-toggle="collapse" href="#sub-item-2"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Room Reservation
+				</a>
+				<ul class="children collapse" id="sub-item-2">
+					<!-- <li>
+						<a href="room">
+							<svg class="glyph stroked plus sign">
+								<use xlink:href="#stroked-plus-sign"/>
+							</svg>
+							Rooms
+						</a>
+					</li> -->
+					<li>
+						<a href="room_reservation">
+							<svg class="glyph stroked eye">
+								<use xlink:href="#stroked-eye"/>
+							</svg>
+							Reservations
+						</a>
+					</li>
+				
+					<li>
+						<a href="room_requested">
+							<svg class="glyph stroked checkmark">
+								<use xlink:href="#stroked-checkmark"/>
+							</svg>
+							Room Requested
+						</a>
+					</li>
+				</ul>
+			</li>
 			<?php if($_SESSION['admin_type'] == 1){ ?>
-			<li class="active">
-				<a href="#">
+			<li>
+				<a href="items">
 					<svg class="glyph stroked desktop">
 						<use xlink:href="#stroked-desktop"/>
 					</svg>
-					Item
+					Items
 				</a>
 			</li>
 			<li>
@@ -72,15 +106,7 @@
 					<svg class="glyph stroked male user ">
 						<use xlink:href="#stroked-male-user"/>
 					</svg>
-					Borrower
-				</a>
-			</li>
-			<li>
-				<a href="room">
-					<svg class="glyph stroked app-window">
-						<use xlink:href="#stroked-app-window"></use>
-					</svg>
-					Room
+					Borrowers
 				</a>
 			</li>
 			<li>
@@ -94,7 +120,7 @@
 			<li>
 				<a href="report">
 					<svg class="glyph stroked line-graph">
-						<use xlink:href="#stroked-line-graph"/>
+						<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#stroked-line-graph"/>
 					</svg>
 					Graph
 				</a>
@@ -104,7 +130,7 @@
 					<svg class="glyph stroked female user">
 						<use xlink:href="#stroked-female-user"/>
 					</svg>
-					User
+					Users
 				</a>
 			</li>
 			<?php 

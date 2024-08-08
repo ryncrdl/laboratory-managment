@@ -65,10 +65,10 @@ var table_room =  $('.table_room').DataTable({
 				exportOptions:{
 					columns: [0]
 				},
-				message: '<img src="LMS/assets/mycustom/js/logo.png" height="100px" width="100px" style="position: absolute;top:0;left:80px;"><center><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
-							<h5>CARLOS HILADO MEMORIAL STATE COLLEGE</h5>\
-							<h6>DEPARTMENT OF INFORMATION SYSTEMS</h6>\
-							</center>',
+				message: '<img src="https://i.imgur.com/RB6tXS4.png" height="100px" width="100px" style="position: absolute;top:0px;left:80px;"><center style="margin: 1rem 0rem;"><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
+				<h5>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES<br>UNISAN CAMPUS</h5>\
+				<h6>Kaliyan Ibaba, Unisan Quezon, Quezon Province</h6>\
+				</center>',
 				customize: function ( win ) {
 					$(win.document.body).find( 'table' ).append('<br<br/><br><br><br><h4 class="">Noted by:</h4><br><br><br><br><br><h4 class="">Prepared by:</h4>');
 				}
@@ -182,10 +182,10 @@ var table_member =  $('.table_member').DataTable({
 				exportOptions:{
 					columns: [0,1,2,3,4,5,6]
 				},
-				message: '<img src="http://4.bp.blogspot.com/_5ydAHJv4lKc/TSm6Sr4vMWI/AAAAAAAAAAQ/B3oGPh3_26k/s1600/logo.png" height="100px" width="100px" style="position: absolute;top:0;left:80px;"><center><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
-							<h5>CARLOS HILADO MEMORIAL STATE COLLEGE</h5>\
-							<h6>DEPARTMENT OF INFORMATION SYSTEMS</h6>\
-							</center>',
+				message: '<img src="https://i.imgur.com/RB6tXS4.png" height="100px" width="100px" style="position: absolute;top:0px;left:80px;"><center style="margin: 1rem 0rem;"><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
+				<h5>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES<br>UNISAN CAMPUS</h5>\
+				<h6>Kaliyan Ibaba, Unisan Quezon, Quezon Province</h6>\
+				</center>',
 				customize: function ( win ) {
 					$(win.document.body).find( 'table' ).append('<br<br/><br><br><br><h4 class="">Noted by:</h4><br><br><br><br><br><h4 class="">Prepared by:</h4>');
 				}
@@ -266,10 +266,10 @@ var table_user =  $('.table_user').DataTable({
 				exportOptions:{
 					columns: [0,1,2]
 				},
-				message: '<img src="http://4.bp.blogspot.com/_5ydAHJv4lKc/TSm6Sr4vMWI/AAAAAAAAAAQ/B3oGPh3_26k/s1600/logo.png" height="100px" width="100px" style="position: absolute;top:0;left:80px;"><center><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
-							<h5>CARLOS HILADO MEMORIAL STATE COLLEGE</h5>\
-							<h6>DEPARTMENT OF INFORMATION SYSTEMS</h6>\
-							</center>',
+				message: '<img src="https://i.imgur.com/RB6tXS4.png" height="100px" width="100px" style="position: absolute;top:0px;left:80px;"><center style="margin: 1rem 0rem;"><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
+				<h5>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES<br>UNISAN CAMPUS</h5>\
+				<h6>Kaliyan Ibaba, Unisan Quezon, Quezon Province</h6>\
+				</center>',
 				customize: function ( win ) {
 					$(win.document.body).find( 'table' ).append('<br<br/><br><br><br><h4 class="">Noted by:</h4><br><br><br><br><br><h4 class="">Prepared by:</h4>');
 				}
@@ -429,10 +429,10 @@ var table_equipment = $('.table_equipment').DataTable({
 				exportOptions:{
 					columns: [0,1,2,3]
 				},
-				message: '<img src="http://4.bp.blogspot.com/_5ydAHJv4lKc/TSm6Sr4vMWI/AAAAAAAAAAQ/B3oGPh3_26k/s1600/logo.png" height="100px" width="100px" style="position: absolute;top:0;left:80px;"><center><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
-							<h5>CARLOS HILADO MEMORIAL STATE COLLEGE</h5>\
-							<h6>DEPARTMENT OF INFORMATION SYSTEMS</h6>\
-							</center>',
+				message: '<img src="https://i.imgur.com/RB6tXS4.png" height="100px" width="100px" style="position: absolute;top:0px;left:80px;"><center style="margin: 1rem 0rem;"><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
+				<h5>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES<br>UNISAN CAMPUS</h5>\
+				<h6>Kaliyan Ibaba, Unisan Quezon, Quezon Province</h6>\
+				</center>',
 				customize: function ( win ) {
 					$(win.document.body).find( 'table' ).append('<br<br/><br><br><br><h4 class="">Noted by:</h4><br><br><br><br><br><h4 class="">Prepared by:</h4>');
 				}
@@ -1171,10 +1171,10 @@ var tbl_borrow = $('.tbl_borrow').DataTable({
 				exportOptions:{
 					columns: [0,1,2,3]
 				},
-				message: '<img src="http://4.bp.blogspot.com/_5ydAHJv4lKc/TSm6Sr4vMWI/AAAAAAAAAAQ/B3oGPh3_26k/s1600/logo.png" height="100px" width="100px" style="position: absolute;top:0;left:80px;"><center><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
-							<h5>CARLOS HILADO MEMORIAL STATE COLLEGE</h5>\
-							<h6>DEPARTMENT OF INFORMATION SYSTEMS</h6>\
-							</center>',
+				message: '<img src="https://i.imgur.com/RB6tXS4.png" height="100px" width="100px" style="position: absolute;top:0px;left:80px;"><center style="margin: 1rem 0rem;"><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
+				<h5>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES<br>UNISAN CAMPUS</h5>\
+				<h6>Kaliyan Ibaba, Unisan Quezon, Quezon Province</h6>\
+				</center>',
 				customize: function ( win ) {
 					$(win.document.body).find( 'table' ).append('<br<br/><br><br><br><h4 class="">Noted by:</h4><br><br><br><br><br><h4 class="">Prepared by:</h4>');
 				}
@@ -1258,10 +1258,10 @@ var tbl_return = $('.tbl_return').DataTable({
 				exportOptions:{
 					columns: [0,1,2]
 				},
-				message: '<img src="http://4.bp.blogspot.com/_5ydAHJv4lKc/TSm6Sr4vMWI/AAAAAAAAAAQ/B3oGPh3_26k/s1600/logo.png" height="100px" width="100px" style="position: absolute;top:0;left:80px;"><center><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
-							<h5>CARLOS HILADO MEMORIAL STATE COLLEGE</h5>\
-							<h6>DEPARTMENT OF INFORMATION SYSTEMS</h6>\
-							</center>',
+				message: '<img src="https://i.imgur.com/RB6tXS4.png" height="100px" width="100px" style="position: absolute;top:0px;left:80px;"><center style="margin: 1rem 0rem;"><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
+				<h5>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES<br>UNISAN CAMPUS</h5>\
+				<h6>Kaliyan Ibaba, Unisan Quezon, Quezon Province</h6>\
+				</center>',
 				customize: function ( win ) {
 					$(win.document.body).find( 'table' ).append('<br<br/><br><br><br><h4 class="">Noted by:</h4><br><br><br><br><br><h4 class="">Prepared by:</h4>');
 				}
@@ -1332,12 +1332,12 @@ var room_tbl_completed = $('.room_tbl_completed').DataTable({
 				extend: "print",
 				className: "btn-sm btn-success",
 				exportOptions:{
-					columns: [0,1,2]
+					columns: [0,1,2,3]
 				},
-				message: '<img src="http://4.bp.blogspot.com/_5ydAHJv4lKc/TSm6Sr4vMWI/AAAAAAAAAAQ/B3oGPh3_26k/s1600/logo.png" height="100px" width="100px" style="position: absolute;top:0;left:80px;"><center><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
-							<h5>CARLOS HILADO MEMORIAL STATE COLLEGE</h5>\
-							<h6>DEPARTMENT OF INFORMATION SYSTEMS</h6>\
-							</center>',
+				message: '<img src="https://i.imgur.com/RB6tXS4.png" height="100px" width="100px" style="position: absolute;top:0px;left:80px;"><center style="margin: 1rem 0rem;"><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
+				<h5>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES<br>UNISAN CAMPUS</h5>\
+				<h6>Kaliyan Ibaba, Unisan Quezon, Quezon Province</h6>\
+				</center>',
 				customize: function ( win ) {
 					$(win.document.body).find( 'table' ).append('<br<br/><br><br><br><h4 class="">Noted by:</h4><br><br><br><br><br><h4 class="">Prepared by:</h4>');
 				}
@@ -1417,9 +1417,9 @@ var tbl_pendingres = $('.tbl_pendingres').DataTable({
 				exportOptions:{
 					columns: [0,1,2,3]
 				},
-				message: '<img src="http://4.bp.blogspot.com/_5ydAHJv4lKc/TSm6Sr4vMWI/AAAAAAAAAAQ/B3oGPh3_26k/s1600/logo.png" height="100px" width="100px" style="position: absolute;top:0;left:80px;"><center><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
-							<h5>CARLOS HILADO MEMORIAL STATE COLLEGE</h5>\
-							<h6>DEPARTMENT OF INFORMATION SYSTEMS</h6>\
+				message: '<img src="https://i.imgur.com/RB6tXS4.png" height="100px" width="100px" style="position: absolute;top:0px;left:80px;"><center style="margin: 1rem 0rem;"><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
+							<h5>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES<br>UNISAN CAMPUS</h5>\
+							<h6>Kaliyan Ibaba, Unisan Quezon, Quezon Province</h6>\
 							</center>',
 				customize: function ( win ) {
 					$(win.document.body).find( 'table' ).append('<br<br/><br><br><br><h4 class="">Noted by:</h4><br><br><br><br><br><h4 class="">Prepared by:</h4>');
@@ -1496,10 +1496,10 @@ var room_tbl_pendingres = $('.room_tbl_pendingres').DataTable({
 				exportOptions:{
 					columns: [0,1,2,3]
 				},
-				message: '<img src="http://4.bp.blogspot.com/_5ydAHJv4lKc/TSm6Sr4vMWI/AAAAAAAAAAQ/B3oGPh3_26k/s1600/logo.png" height="100px" width="100px" style="position: absolute;top:0;left:80px;"><center><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
-							<h5>CARLOS HILADO MEMORIAL STATE COLLEGE</h5>\
-							<h6>DEPARTMENT OF INFORMATION SYSTEMS</h6>\
-							</center>',
+				message: '<img src="https://i.imgur.com/RB6tXS4.png" height="100px" width="100px" style="position: absolute;top:0px;left:80px;"><center style="margin: 1rem 0rem;"><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
+						<h5>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES<br>UNISAN CAMPUS</h5>\
+						<h6>Kaliyan Ibaba, Unisan Quezon, Quezon Province</h6>\
+						</center>',
 				customize: function ( win ) {
 					$(win.document.body).find( 'table' ).append('<br<br/><br><br><br><h4 class="">Noted by:</h4><br><br><br><br><br><h4 class="">Prepared by:</h4>');
 				}
@@ -1575,9 +1575,9 @@ var tbl_reserved = $('.tbl_reserved').DataTable({
 				exportOptions:{
 					columns: [0,1,2,3]
 				},
-				message: '<img src="http://4.bp.blogspot.com/_5ydAHJv4lKc/TSm6Sr4vMWI/AAAAAAAAAAQ/B3oGPh3_26k/s1600/logo.png" height="100px" width="100px" style="position: absolute;top:0;left:80px;"><center><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
-							<h5>CARLOS HILADO MEMORIAL STATE COLLEGE</h5>\
-							<h6>DEPARTMENT OF INFORMATION SYSTEMS</h6>\
+				message: '<img src="https://i.imgur.com/RB6tXS4.png" height="100px" width="100px" style="position: absolute;top:0px;left:80px;"><center style="margin: 1rem 0rem;"><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
+							<h5>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES<br>UNISAN CAMPUS</h5>\
+							<h6>Kaliyan Ibaba, Unisan Quezon, Quezon Province</h6>\
 							</center>',
 				customize: function ( win ) {
 					$(win.document.body).find( 'table' ).append('<br<br/><br><br><br><h4 class="">Noted by:</h4><br><br><br><br><br><h4 class="">Prepared by:</h4>');
@@ -1653,10 +1653,10 @@ var room_tbl_reserved = $('.room_tbl_reserved').DataTable({
 				exportOptions:{
 					columns: [0,1,2,3]
 				},
-				message: '<img src="http://4.bp.blogspot.com/_5ydAHJv4lKc/TSm6Sr4vMWI/AAAAAAAAAAQ/B3oGPh3_26k/s1600/logo.png" height="100px" width="100px" style="position: absolute;top:0;left:80px;"><center><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
-							<h5>CARLOS HILADO MEMORIAL STATE COLLEGE</h5>\
-							<h6>DEPARTMENT OF INFORMATION SYSTEMS</h6>\
-							</center>',
+				message: '<img src="https://i.imgur.com/RB6tXS4.png" height="100px" width="100px" style="position: absolute;top:0px;left:80px;"><center style="margin: 1rem 0rem;"><h4 style="margin-top:-40px;">REPUBLIC OF THE PHILIPPINES</h4>\
+				<h5>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES<br>UNISAN CAMPUS</h5>\
+				<h6>Kaliyan Ibaba, Unisan Quezon, Quezon Province</h6>\
+				</center>',
 				customize: function ( win ) {
 					$(win.document.body).find( 'table' ).append('<br<br/><br><br><br><h4 class="">Noted by:</h4><br><br><br><br><br><h4 class="">Prepared by:</h4>');
 				}

@@ -325,6 +325,7 @@ $('.room_reservation').submit(function(e){
 			$('select[name="reserve_room"]').val('');
 			$(".room_reservation").find('select').select2('val', 'All');
 			room_tbl_pendingres.ajax.reload(null,false);
+			room_tbl_reserved.ajax.reload(null,false);
 
 		}else if(data == 2){
 			toastr.warning('Your reservation cannot process. You can only make one reservation per day.');
@@ -333,6 +334,7 @@ $('.room_reservation').submit(function(e){
 			$('select[name="reserve_room"]').val('');
 			$(".room_reservation").find('select').select2('val', 'All');
 			room_tbl_pendingres.ajax.reload(null,false);
+			room_tbl_reserved.ajax.reload(null,false);
 		}else{
 			toastr.error('Your reservation cannot process right now.');
 		}

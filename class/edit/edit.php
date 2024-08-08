@@ -418,7 +418,6 @@
 				$add = $conn->prepare('INSERT INTO reservation_status (reservation_code, remark, res_status) VALUES(?,?,?)');
 				$add->execute(array($code,'Accepted Reservation',1));
 				$addrow = $add->rowCount();
-
 				echo $addrow;
 			}
 		}
@@ -533,7 +532,7 @@
 			$sessionid = $_SESSION['admin_id'];
 
 			$up = $conn->prepare('UPDATE room_reservation SET status = ? WHERE reservation_code = ? ');
-			$up->execute(array(3,$code));
+			$up->execute(array(1,$code));
 			$num = $up->rowCount();
 			if($num > 0){
 				echo json_encode(array("response" => 1));

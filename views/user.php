@@ -8,7 +8,7 @@ include 'header.php';
 		</div>
 	</form>
 	<ul class="nav menu">
-	<img src="../assets/logo.png" style="width: 150px; height: 150px; position: relative; left: 50%; transform: translate(-50%);"/>http://localhost/laboratory-managment/views/user#
+	<img src="../assets/logo.png" style="width: 150px; height: 150px; position: relative; left: 50%; transform: translate(-50%);"/>
 			<div class="text-center" style="font-size: 2rem; margin: 1rem 0rem;">Hi, <span class="text-primary" style="color: #800000; font-weight: bold;"><?php echo $_SESSION['admin_name'];?></span></div>
 			<li>
 				<a href="dashboard">
@@ -65,14 +65,14 @@ include 'header.php';
 					<span data-toggle="collapse" href="#sub-item-2"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Room Reservation
 				</a>
 				<ul class="children collapse" id="sub-item-2">
-					<li>
+					<!-- <li>
 						<a href="room">
 							<svg class="glyph stroked plus sign">
 								<use xlink:href="#stroked-plus-sign"/>
 							</svg>
 							Rooms
 						</a>
-					</li>
+					</li> -->
 					<li>
 						<a href="room_reservation">
 							<svg class="glyph stroked eye">

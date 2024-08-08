@@ -835,6 +835,7 @@ class display
 					ucwords($value['rm_name']),
 					$button
 				);
+				header("Refresh:0; url=room_reservation.php");
 			}
 			echo json_encode($data);
 		} else {

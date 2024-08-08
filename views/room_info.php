@@ -73,14 +73,14 @@ include 'header.php';
 				Borrower
 			</a>
 		</li>
-		<li class="active">
+		<!-- <li class="active">
 			<a href="#">
 				<svg class="glyph stroked app-window">
 					<use xlink:href="#stroked-app-window"></use>
 				</svg>
 				Room
 			</a>
-		</li>
+		</li> -->
 		<li>
 			<a href="inventory">
 				<svg class="glyph stroked clipboard with paper">

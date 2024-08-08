@@ -884,7 +884,7 @@ $('.frm_room_cancelreservation').submit(function(e){
 		if(data > 0){
 			toastr.success('Successfully cancelled reservation');
 			room__tbl_pendingres.ajax.reload(null,false);
-			tbl_reserved.ajax.reload(null,false);
+			room_tbl_reserved.ajax.reload(null,false);
 		}else{
 			toastr.error('Failed to cancel reservation');
 		}

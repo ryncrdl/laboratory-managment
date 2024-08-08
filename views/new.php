@@ -72,14 +72,14 @@ include 'header.php';
 					</svg></span> Room Reservation
 			</a>
 			<ul class="children collapse" id="sub-item-2">
-				<li>
+				<!-- <li>
 					<a href="room">
 						<svg class="glyph stroked plus sign">
 							<use xlink:href="#stroked-plus-sign" />
 						</svg>
 						Rooms
 					</a>
-				</li>
+				</li> -->
 				<li>
 					<a href="room_reservation">
 						<svg class="glyph stroked eye">
