@@ -42,23 +42,68 @@ class add
 	{
 		global $conn;
 
-		$sql = $conn->prepare('SELECT * FROM member WHERE m_school_id = ? AND m_fname = ? AND m_lname = ? AND m_type = ?');
-		$sql->execute(array($sid_number, $s_fname, $s_lname, $type));
-		$sql_count = $sql->rowCount();
-		if ($sql_count <= 0) {
+		$sql = $conn->prepare('SELECT * FROM member WHERE m_school_id = ? AND m_type = ?');
+		$sql->execute(array($sid_number, $type));
+		$duplicate_id = $sql->rowCount();
+		if ($duplicate_id > 0) {
+			echo '1';
+			return;
+		}
 
-			$insert = $conn->prepare('INSERT INTO  member(m_school_id, m_fname, m_lname, m_gender, m_contact,m_email, m_department, m_year_section, m_type, m_password) VALUES(?, ?, ?, ?, ?,?, ?, ?, ?, ?)');
-			$insert->execute(array($sid_number, $s_fname, $s_lname, $s_gender, $s_contact, $s_email, $s_department, $s_year . ' - ' . $s_section, $type, $s_password));
-			$insert_count = $insert->rowCount();
+		$sql_email = $conn->prepare('SELECT * FROM member WHERE m_email = ?');
+		$sql_email->execute(array($s_email));
+		$duplicate_email = $sql_email->rowCount();
+		if ($duplicate_email > 0) {
+			echo '2';
+			return;
+		}
 
-			if ($insert_count > 0) {
-				echo "1";
-			} else {
-				echo "0";
-			}
+		$sql_contact = $conn->prepare('SELECT * FROM member WHERE m_contact = ?');
+		$sql_contact->execute(array($s_contact));
+		$duplicate_contact = $sql_contact->rowCount();
+		if ($duplicate_contact > 0) {
+			echo '3';
+			return;
+		}
 
+		$minLength = 8;
+		if (strlen($s_password) < $minLength) {
+			echo '4';
+			return;
+		}
+
+		$hasUppercase = preg_match('/[A-Z]/', $s_password);
+		if (!$hasUppercase) {
+			echo '5';
+			return;
+		}
+
+		$hasLowercase = preg_match('/[a-z]/', $s_password);
+		if (!$hasLowercase) {
+			echo '6';
+			return;
+		}
+
+		$hasSpecialChar = preg_match('/[\W_]/', $s_password);
+		if (!$hasSpecialChar) {
+			echo '7';
+			return;
+		}
+		$minContact = 11;
+		$formatContact = preg_match('/^09/', $s_contact);
+		if (strlen($s_contact) < $minContact || strlen($s_contact) < 11 || !$formatContact) {
+			echo '8';
+			return;
+		}
+
+		$insert = $conn->prepare('INSERT INTO  member(m_school_id, m_fname, m_lname, m_gender, m_contact,m_email, m_department, m_year_section, m_type, m_password) VALUES(?, ?, ?, ?, ?,?, ?, ?, ?, ?)');
+		$insert->execute(array($sid_number, $s_fname, $s_lname, $s_gender, $s_contact, $s_email, $s_department, $s_year . ' - ' . $s_section, $type, md5($s_password)));
+		$insert_count = $insert->rowCount();
+
+		if ($insert_count > 0) {
+			echo "9";
 		} else {
-			echo "2";
+			echo "0";
 		}
 	}
 
@@ -66,17 +111,71 @@ class add
 	{
 		global $conn;
 
+		$sql = $conn->prepare('SELECT * FROM member WHERE m_school_id = ? AND m_type = ?');
+		$sql->execute(array($f_id, $type));
+		$duplicate_id = $sql->rowCount();
+		if ($duplicate_id > 0) {
+			echo '1';
+			return;
+		}
+
+		$sql_email = $conn->prepare('SELECT * FROM member WHERE m_email = ?');
+		$sql_email->execute(array($f_email));
+		$duplicate_email = $sql_email->rowCount();
+		if ($duplicate_email > 0) {
+			echo '2';
+			return;
+		}
+
+		$sql_contact = $conn->prepare('SELECT * FROM member WHERE m_contact = ?');
+		$sql_contact->execute(array($f_contact));
+		$duplicate_contact = $sql_contact->rowCount();
+		if ($duplicate_contact > 0) {
+			echo '3';
+			return;
+		}
+
+		$minLength = 8;
+		if (strlen($f_password) < $minLength) {
+			echo '4';
+			return;
+		}
+
+		$hasUppercase = preg_match('/[A-Z]/', $f_password);
+		if (!$hasUppercase) {
+			echo '5';
+			return;
+		}
+
+		$hasLowercase = preg_match('/[a-z]/', $f_password);
+		if (!$hasLowercase) {
+			echo '6';
+			return;
+		}
+
+		$hasSpecialChar = preg_match('/[\W_]/', $f_password);
+		if (!$hasSpecialChar) {
+			echo '7';
+			return;
+		}
+		$minContact = 11;
+		$formatContact = preg_match('/^09/', $f_contact);
+		if (strlen($f_contact) < $minContact || strlen($f_contact) < 11 || !$formatContact) {
+			echo '8';
+			return;
+		}
+
 		$sql = $conn->prepare('SELECT * FROM member WHERE m_school_id = ? AND m_fname = ? AND m_lname = ? AND m_type = ?');
 		$sql->execute(array($f_id, $f_fname, $f_lname, $type));
 		$sql_count = $sql->rowCount();
 		if ($sql_count <= 0) {
 
 			$insert = $conn->prepare('INSERT INTO  member(m_school_id, m_fname, m_lname, m_gender, m_contact,m_email, m_department, m_type, m_password) VALUES(?, ?, ?, ?, ?, ?,?, ?, ?)');
-			$insert->execute(array($f_id, $f_fname, $f_lname, $f_gender, $f_contact, $f_email, $f_department, $type, $f_password));
+			$insert->execute(array($f_id, $f_fname, $f_lname, $f_gender, $f_contact, $f_email, $f_department, $type, md5($f_password)));
 			$insert_count = $insert->rowCount();
 
 			if ($insert_count > 0) {
-				echo "1";
+				echo "9";
 			} else {
 				echo "0";
 			}
@@ -87,21 +186,21 @@ class add
 
 	}
 
-	public function add_equipment()
+	public function add_equipment($e_number, $e_model, $e_category, $e_brand, $e_description, $e_stock, $e_assigned, $e_type, $e_status, $e_mr, $e_price)
 	{
 		global $conn;
 
-		$e_model = $_POST['e_model'];
-		$e_number = $_POST['e_number'];
-		$e_category = $_POST['e_category'];
-		$e_brand = $_POST['e_brand'];
-		$e_description = $_POST['e_description'];
-		$e_stock = $_POST['e_stock'];
-		$e_assigned = $_POST['e_assigned'];
-		$e_type = $_POST['e_type'];
-		$e_status = $_POST['e_status'];
-		$e_mr = $_POST['e_mr'];
-		$e_price = $_POST['e_price'];
+		// $e_model = $_POST['e_model'];
+		// $e_number = $_POST['e_number'];
+		// $e_category = $_POST['e_category'];
+		// $e_brand = $_POST['e_brand'];
+		// $e_description = $_POST['e_description'];
+		// $e_stock = $_POST['e_stock'];
+		// $e_assigned = $_POST['e_assigned'];
+		// $e_type = $_POST['e_type'];
+		// $e_status = $_POST['e_status'];
+		// $e_mr = $_POST['e_mr'];
+		// $e_price = $_POST['e_price'];
 
 		session_start();
 		$h_desc = 'add new equipment' . $e_model . ' , ' . $e_category;
@@ -424,7 +523,7 @@ switch ($key) {
 		$s_major = trim($_POST['s_major']);
 		$s_year = trim($_POST['s_year']);
 		$s_section = trim($_POST['s_section']);
-		$s_password = trim(md5($_POST['s_password']));
+		$s_password = trim($_POST['s_password']);
 		$type = 'Student';
 		$add_function->sign_student($sid_number, $s_fname, $s_lname, $s_gender, $s_contact, $s_email, $s_department, $s_major, $s_year, $s_section, $s_password, $type);
 		break;
@@ -437,7 +536,7 @@ switch ($key) {
 		$f_contact = trim($_POST['f_contact']);
 		$f_email = trim($_POST['f_email']);
 		$f_department = trim($_POST['f_department']);
-		$f_password = trim(md5($_POST['f_password']));
+		$f_password = trim($_POST['f_password']);
 
 		$type = 'Faculty';
 		$add_function->sign_faculty($f_id, $f_fname, $f_lname, $f_gender, $f_contact, $f_email, $f_department, $f_password, $type);
@@ -450,10 +549,12 @@ switch ($key) {
 		$e_brand = trim($_POST['e_brand']);
 		$e_description = trim($_POST['e_description']);
 		$e_stock = trim($_POST['e_stock']);
-		$e_assigned = trim($_POST['e_assigned']);
+		$e_assigned = trim('COM_LAB');
 		$e_type = trim($_POST['e_type']);
 		$e_status = trim($_POST['e_status']);
-		$add_function->add_equipment($e_number, $e_model, $e_category, $e_brand, $e_description, $e_stock, $e_assigned, $e_type, $e_status);
+		$e_mr = trim($_POST['e_mr']);
+		$e_price = trim($_POST['e_price']);
+		$add_function->add_equipment($e_number, $e_model, $e_category, $e_brand, $e_description, $e_stock, $e_assigned, $e_type, $e_status, $e_mr, $e_price);
 		break;
 
 	case 'add_member';

@@ -140,7 +140,7 @@ include 'header.php';
 					Users
 				</a>
 			</li>
-		<?php
+			<?php
 		}
 		($_SESSION['admin_type'] == 1) ? include ('include_history.php') : false;
 		?>

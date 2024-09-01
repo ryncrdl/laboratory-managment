@@ -495,23 +495,32 @@ class display
 	{
 		global $conn;
 
-		$sql = $conn->prepare('SELECT * FROM item
-									LEFT JOIN item_stock ON item_stock.item_id = item.id
-									GROUP BY item.i_category');
-		$sql->execute(array(4));
-		$count = $sql->rowCount();
-		$fetch = $sql->fetchAll();
+		try {
+			$sql = $conn->prepare('SELECT * FROM item
+			LEFT JOIN item_stock ON item_stock.item_id = item.id
+			GROUP BY item.i_category');
 
-		if ($count > 0) {
-			foreach ($fetch as $key => $value) {
-				$unusable = $value['item_rawstock'] - $value['items_stock'];
-				$data['data'][] = array($value['i_category'], $value['items_stock'], $unusable, $value['item_rawstock']);
+			$sql->execute(array(4));
+			$count = $sql->rowCount();
+			$fetch = $sql->fetchAll();
+
+			if ($count > 0) {
+				foreach ($fetch as $key => $value) {
+					$unusable = $value['item_rawstock'] - $value['items_stock'];
+					$data['data'][] = array($value['i_category'], $value['items_stock'], $unusable, $value['item_rawstock']);
+				}
+				echo json_encode($data);
+			} else {
+				$data['data'] = array();
+				echo json_encode($data);
 			}
-			echo json_encode($data);
-		} else {
-			$data['data'] = array();
-			echo json_encode($data);
+
+		} catch (Throwable $th) {
+			//throw $th;
 		}
+
+
+
 
 	}
 
@@ -733,11 +742,11 @@ class display
 		if ($count > 0) {
 			foreach ($fetch as $value) {
 				// Prepare the action buttons
-				$button = "<button class='btn btn-primary btn-accept' data-id='".$value['reservation_code'] . "'>
+				$button = "<button class='btn btn-primary btn-accept' data-id='" . $value['reservation_code'] . "'>
                         Accept
                         <i class='fa fa-chevron-right'></i>
                        </button>
-                       <button class='btn btn-danger btn-cancel' data-id='".$value['reservation_code'] . "'>
+                       <button class='btn btn-danger btn-cancel' data-id='" . $value['reservation_code'] . "'>
                         Cancel
                         <i class='fa fa-remove'></i>
                        </button>";
@@ -792,7 +801,7 @@ class display
 			echo json_encode($data);
 		}
 	}
-	
+
 	public function accept_room_reservation()
 	{
 		global $conn;
@@ -1258,7 +1267,8 @@ class display
 		$count = $sql->rowCount();
 		$reserveArr = array();
 		if ($count > 0) {
-			foreach ($fetch as $reservation) {http://localhost/laboratory-managment/views/user
+			foreach ($fetch as $reservation) {
+				http://localhost/laboratory-managment/views/user
 				$reserveArr[] = array(
 					"title" => $reservation['item_borrow'] . " " . ucwords($reservation['rm_name']),
 					"allDay" => false,
@@ -1385,7 +1395,7 @@ switch ($key) {
 		$display->display_return();
 		break;
 
-		case 'display_room_completed';
+	case 'display_room_completed';
 		$display->display_room_completed();
 		break;
 

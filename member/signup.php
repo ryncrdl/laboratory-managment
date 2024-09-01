@@ -108,7 +108,8 @@
 						</div>
 						<div class="form-group">
 							<label>Contact Number</label>
-							<input type="tel" name="s_contact" class="form-control" required autocomplete="off">
+							<input type="tel" onkeypress="return isNumberKey(event)" name="s_contact"
+								class="form-control" maxlength="11" required autocomplete="off">
 						</div>
 						<div class="form-group">
 							<label>Email</label>
@@ -189,7 +190,8 @@
 						</div>
 						<div class="form-group">
 							<label>Contact Number</label>
-							<input type="tel" name="f_contact" class="form-control" required autocomplete="off">
+							<input type="tel" maxlength="11" onkeypress="return isNumberKey(event)" id="contact"
+								name="f_contact" class="form-control" required autocomplete="off">
 						</div>
 						<div class="form-group">
 							<label>Email</label>
@@ -226,6 +228,16 @@
 		</div>
 
 	</div>
+
+	<script>
+		function isNumberKey(evt) {
+			var charCode = (evt.which) ? evt.which : evt.keyCode;
+			if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+				return false;
+			}
+			return true;
+		}
+	</script>
 
 
 

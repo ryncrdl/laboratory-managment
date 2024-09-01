@@ -257,7 +257,7 @@ class edit
 
 	}
 
-	public function edit_member($sid_number, $s_password, $fname, $lname, $s_gender, $s_contact, $s_email, $s_department, $s_type, $yrs, $app_id)
+	public function edit_member($sid_number, $fname, $lname, $s_gender, $s_contact, $s_email, $s_department, $s_type, $yrs, $app_id)
 	{
 
 		global $conn;
@@ -269,9 +269,9 @@ class edit
 		$sessiontype = $_SESSION['admin_type'];
 
 
-		$sql = $conn->prepare('UPDATE member SET m_school_id = ?, m_password = ?, m_fname = ?, m_lname = ?, m_gender = ?, m_contact = ?, m_email = ?, m_department = ?, m_year_section = ?, m_type = ? WHERE id = ?;
+		$sql = $conn->prepare('UPDATE member SET m_school_id = ?, m_fname = ?, m_lname = ?, m_gender = ?, m_contact = ?, m_email = ?, m_department = ?, m_year_section = ?, m_type = ? WHERE id = ?;
 									INSERT INTO history_logs(description,table_name,user_id,user_type) VALUES(?,?,?,?)');
-		$sql->execute(array($sid_number, $s_password, $fname, $lname, $s_gender, $s_contact, $s_email, $s_department, $yrs, $s_type, $app_id, $h_desc, $h_tbl, $sessionid, $sessiontype));
+		$sql->execute(array($sid_number, $fname, $lname, $s_gender, $s_contact, $s_email, $s_department, $yrs, $s_type, $app_id, $h_desc, $h_tbl, $sessionid, $sessiontype));
 		$row = $sql->rowCount();
 		echo $row;
 	}
@@ -672,7 +672,6 @@ switch ($key) {
 
 	case 'edit_member';
 		$sid_number = $_POST['sid_number'];
-		$s_password = md5($_POST['s_password']);
 		$fname = $_POST['s_fname'];
 		$lname = $_POST['s_lname'];
 		$s_gender = $_POST['s_gender'];
@@ -682,7 +681,7 @@ switch ($key) {
 		$yrs = $_POST['s_year'] . '-' . $_POST['s_section'];
 		$app_id = $_POST['app_id'];
 		$s_type = $_POST['s_type'];
-		$edit->edit_member($sid_number, $s_password, $fname, $lname, $s_gender, $s_contact, $s_email, $s_department, $s_type, $yrs, $app_id);
+		$edit->edit_member($sid_number, $fname, $lname, $s_gender, $s_contact, $s_email, $s_department, $s_type, $yrs, $app_id);
 		break;
 
 	case 'activate_member';

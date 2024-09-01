@@ -124,13 +124,42 @@ class login
 		$m_email = $_SESSION['verification_email'];
 		$id = $_SESSION['user_id'];
 
-		if ($password == $confirm_password) {
-			$sql = $conn->prepare('UPDATE member SET m_password = ? WHERE m_school_id = ? AND m_email = ?');
-			$sql->execute(array(md5($password), $id, $m_email));
-			$row = $sql->rowCount();
+
+		$minLength = 8;
+		if (strlen($password) < $minLength) {
 			echo '1';
-		} else {
-			echo '0';
+			return;
+		}
+
+		$hasUppercase = preg_match('/[A-Z]/', $password);
+		if (!$hasUppercase) {
+			echo '2';
+			return;
+		}
+
+		$hasLowercase = preg_match('/[a-z]/', $password);
+		if (!$hasLowercase) {
+			echo '3';
+			return;
+		}
+
+		$hasSpecialChar = preg_match('/[\W]/', $password);
+		if (!$hasSpecialChar) {
+			echo '4';
+			return;
+		}
+
+		if ($password !== $confirm_password) {
+			echo '5';
+			return;
+		}
+
+		$sql = $conn->prepare('UPDATE member SET m_password = ? WHERE m_school_id = ? AND m_email = ?');
+		$sql->execute(array(md5($password), $id, $m_email));
+		$row = $sql->rowCount();
+
+		if ($row > 0) {
+			echo '6';
 		}
 	}
 

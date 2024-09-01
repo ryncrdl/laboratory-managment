@@ -5,185 +5,213 @@
 *
 */
 
-$('.frm_addroom').submit(function(e){
-	e.preventDefault();
-	var a = $('input[name="room_name"]');
-	
-	$.ajax({
-		type: "POST",
-		url: "../class/add/add",
-		data: {
-			name: a.val(),
-			key: 'add_room'
-		}
-	})
-	.done(function(data){
-		a.val('');
-		if(data == 1){
-			toastr.success("Room added.");
-			table_room.ajax.reload(null,false);
-			$('.cancel_room').click();
-		}
-		else if(data == 2){
-			toastr.warning("Room already exist");
+$(".frm_addroom").submit(function (e) {
+  e.preventDefault();
+  var a = $('input[name="room_name"]');
 
-		}else if(data == 0){
-			toastr.error("Failed to add room");
-			$('.cancel_room').click();
-
-		}
-	})
-	.fail(function(data){
-		console.log(data);
-	});
-
+  $.ajax({
+    type: "POST",
+    url: "../class/add/add",
+    data: {
+      name: a.val(),
+      key: "add_room",
+    },
+  })
+    .done(function (data) {
+      a.val("");
+      if (data == 1) {
+        toastr.success("Room added.");
+        table_room.ajax.reload(null, false);
+        $(".cancel_room").click();
+      } else if (data == 2) {
+        toastr.warning("Room already exist");
+      } else if (data == 0) {
+        toastr.error("Failed to add room");
+        $(".cancel_room").click();
+      }
+    })
+    .fail(function (data) {
+      console.log(data);
+    });
 });
 
+$(".frm_student_sign").submit(function (e) {
+  e.preventDefault();
+  var datas = $(this).serialize() + "&key=sign_student";
 
-$('.frm_student_sign').submit(function(e){
-	e.preventDefault();
-	var datas = $(this).serialize()+'&key=sign_student';	
-
-	$.ajax({
-		type: "POST",
-		data: datas,
-		url : '../class/add/add',
-		beforeSend: function(){
-			$('.btn_student').attr('disabled', true);
-		}
-	})
-	.done(function(data){
-		$('.btn_student').removeAttr('disabled');
-		if(data == 1){
-			
-			toastr.success('Successfully signup', 'Redirecting page');
-			setTimeout(function(){
-				window.location = 'login';
-			},3000);
-
-		}else if(data == 2){
-			toastr.warning('Student already exist');
-		}else if(data == 0){
-			toastr.error('Failed to signup');
-		}
-	})
-	.fail(function(data){
-		console.log(data);
-	});
-
+  $.ajax({
+    type: "POST",
+    data: datas,
+    url: "../class/add/add",
+    beforeSend: function () {
+      $(".btn_student").attr("disabled", true);
+    },
+  })
+    .done(function (data) {
+      $(".btn_student").removeAttr("disabled");
+      if (data == 1) {
+        toastr.error("School ID Number is already used.", "Error");
+      } else if (data == 2) {
+        toastr.error("Email is already used.", "Error");
+      } else if (data == 3) {
+        toastr.error("Contact is already used.", "Error");
+      } else if (data == 4) {
+        toastr.error("Password must be at least 8 characters long.", "Error");
+      } else if (data == 5) {
+        toastr.error(
+          "Password must contain at least one uppercase letter.",
+          "Error"
+        );
+      } else if (data == 6) {
+        toastr.error(
+          "Password must contain at least one lowercase letter.",
+          "Error"
+        );
+      } else if (data == 7) {
+        toastr.error(
+          "Password must contain at least one special character.",
+          "Error"
+        );
+      } else if (data == 8) {
+        toastr.error("Invalid contact number.", "Error");
+      } else if (data == 9) {
+        toastr.success("Successfully signup", "Redirecting page");
+        setTimeout(function () {
+          window.location = "login";
+        }, 3000);
+      }
+    })
+    .fail(function (data) {
+      console.log(data);
+    });
 });
 
-$('.frm_faculty_sign').submit(function(e){
-	e.preventDefault();
-	var datas = $(this).serialize()+'&key=sign_faculty';
+$(".frm_faculty_sign").submit(function (e) {
+  e.preventDefault();
+  var datas = $(this).serialize() + "&key=sign_faculty";
 
-	$.ajax({
-		type: "POST",
-		data: datas,
-		url : '../class/add/add'
-	})
-	.done(function(data){
-		console.log(data);
-		$('.btn_faculty').removeAttr('disabled');
-		if(data == 1){
-			
-			toastr.success('Successfully signup', 'Redirecting page');
-			setTimeout(function(){
-				window.location = 'login';
-			},3000);
-
-		}else if(data == 2){
-			toastr.warning('Faculty already exist');
-		}else if(data == 0){
-			toastr.error('Failed to signup');
-		}
-	})
-	.fail(function(data){
-		console.log(data);
-	});
-
+  $.ajax({
+    type: "POST",
+    data: datas,
+    url: "../class/add/add",
+  })
+    .done(function (data) {
+      console.log(data);
+      $(".btn_faculty").removeAttr("disabled");
+      if (data == 1) {
+        toastr.error("School ID Number is already used.", "Error");
+      } else if (data == 2) {
+        toastr.error("Email is already used.", "Error");
+      } else if (data == 3) {
+        toastr.error("Contact is already used.", "Error");
+      } else if (data == 4) {
+        toastr.error("Password must be at least 8 characters long.", "Error");
+      } else if (data == 5) {
+        toastr.error(
+          "Password must contain at least one uppercase letter.",
+          "Error"
+        );
+      } else if (data == 6) {
+        toastr.error(
+          "Password must contain at least one lowercase letter.",
+          "Error"
+        );
+      } else if (data == 7) {
+        toastr.error(
+          "Password must contain at least one special character.",
+          "Error"
+        );
+      } else if (data == 8) {
+        toastr.error("Invalid contact number.", "Error");
+      } else if (data == 9) {
+        toastr.success("Successfully signup", "Redirecting page");
+        setTimeout(function () {
+          window.location = "login";
+        }, 3000);
+      }
+    })
+    .fail(function (data) {
+      console.log(data);
+    });
 });
 
+$(".frm_addequipment").submit(function (e) {
+  e.preventDefault();
+  var _this = $(this);
+  var formData = new FormData();
+  var fileData = _this.find('input[type="file"]').prop("files")[0];
+  formData.append("e_photo", fileData);
+  var otherFormData = _this.serializeArray();
+  $.each(otherFormData, function (key, input) {
+    formData.append(input.name, input.value);
+  });
 
-$('.frm_addequipment').submit(function(e){
-	e.preventDefault();
-	var _this = $(this);
-	var formData = new FormData();
-	var fileData = _this.find('input[type="file"]').prop('files')[0];
-	formData.append("e_photo",fileData);
-	var otherFormData = _this.serializeArray();
-	$.each(otherFormData,function(key,input){
-		formData.append(input.name,input.value);
-	});
-
-	$.ajax({
-		type: "POST",
-		url: "../class/add/add",
-		data: formData,
-		async: true,
-		cache: false,
-		contentType: false,
-		processData: false 
-	})
-	.done(function(data){
-		console.log(data);
-		if(data == 1){
-			toastr.success("Item added.");
-			table_equipment.ajax.reload(null,false);
-			$('.cancel-equipment').click();
-			$('.frm_addequipment').find('input').val('');
-		}else if(data == 0){
-			toastr.error("Failed to add item");
-			$('.cancel-equipment').click();
-			$('.frm_addequipment').find('input').val('');
-		}
-	})
-	.fail(function(data){
-		console.log(data);
-	});
-
+  $.ajax({
+    type: "POST",
+    url: "../class/add/add",
+    data: formData,
+    async: true,
+    cache: false,
+    contentType: false,
+    processData: false,
+  })
+    .done(function (data) {
+      console.log(data);
+      if (data == 1) {
+        toastr.success("Item added.");
+        table_equipment.ajax.reload(null, false);
+        $(".cancel-equipment").click();
+        $(".frm_addequipment").find("input").val("");
+      } else if (data == 0) {
+        toastr.error("Failed to add item");
+        $(".cancel-equipment").click();
+        $(".frm_addequipment").find("input").val("");
+      }
+    })
+    .fail(function (data) {
+      console.log(data);
+    });
 });
 
+$(".frm_addmember").submit(function (e) {
+  e.preventDefault();
 
-$(".frm_addmember").submit(function(e){
-	e.preventDefault();
+  var formData = new FormData($(this)[0]);
 
-	var formData = new FormData($(this)[0]);
+  console.log(formData);
 
-	console.log(formData);
-
-	$.ajax({
-		type: "POST",
-		url: "../class/add/add",
-		data: formData,
-		contentType: false,
-		cache: false,
-		processData:false,
-	})
-	.done(function(data){
-		if(data == 1){
-			toastr.success("Members added successfully.");
-			table_member.ajax.reload(null,false);
-			$('.member-side').toggle(effect, options, duration);
-		}else if(data == 0){
-			toastr.error("Failed to add member");
-			$('.member-side').toggle(effect, options, duration);
-		}
-	});
-
+  $.ajax({
+    type: "POST",
+    url: "../class/add/add",
+    data: formData,
+    contentType: false,
+    cache: false,
+    processData: false,
+  }).done(function (data) {
+    if (data == 1) {
+      toastr.success("Members added successfully.");
+      table_member.ajax.reload(null, false);
+      $(".member-side").toggle(effect, options, duration);
+    } else if (data == 0) {
+      toastr.error("Failed to add member");
+      $(".member-side").toggle(effect, options, duration);
+    }
+  });
 });
 
-
-$('.item-add').click(function(){
-    $('.equipment-info').toggle(effect, options, duration);
-    var id = getequipmentid();
-    console.log(id);
-    var append = '  <form class="frm_eadditem">\
+$(".item-add").click(function () {
+  $(".equipment-info").toggle(effect, options, duration);
+  var id = getequipmentid();
+  console.log(id);
+  var append =
+    '  <form class="frm_eadditem">\
                         <h4 class="alert bg-success">Add Quantity</h4>\
                         <div class="form-group">\
                             <label>Quantity</label>\
                             <input type="number" name="item_qty" class="form-control" min="1" required autofocus="on">\
-                            <input type="hidden" name="id" value="'+id+'">\
+                            <input type="hidden" name="id" value="' +
+    id +
+    '">\
                             <input type="hidden" name="key" value="add_itemqty">\
                         </div>\
                         <div class="form-group">\
@@ -192,161 +220,155 @@ $('.item-add').click(function(){
                         </div>\
                     </form>';
 
-    $('.equipment-forminfo').html(append);
+  $(".equipment-forminfo").html(append);
 
-    $('form.frm_eadditem').submit(function(e){
-        e.preventDefault();
-        var c = $(this).serialize();
+  $("form.frm_eadditem").submit(function (e) {
+    e.preventDefault();
+    var c = $(this).serialize();
 
-        $.ajax({
-            type: "POST",
-            url: "../class/add/add",
-            data: c
-        })
-        .done(function(data){
-        	var ab = data.split('|');
-        	$('.e_stock').html(ab[0]);
-        	$('.e_stockleft').html(ab[1]);
-        	toastr.success('Successful');
-        	$('.equipment-info').toggle(effect, options, duration);
-        	$('input[name="item_qty"]').val('');
-        });
-
+    $.ajax({
+      type: "POST",
+      url: "../class/add/add",
+      data: c,
+    }).done(function (data) {
+      var ab = data.split("|");
+      $(".e_stock").html(ab[0]);
+      $(".e_stockleft").html(ab[1]);
+      toastr.success("Successful");
+      $(".equipment-info").toggle(effect, options, duration);
+      $('input[name="item_qty"]').val("");
     });
+  });
 });
 
-
-$('.frm_borrow').submit(function(e){
-	e.preventDefault();
-	var data = $(this).serialize()+'&key=add_borrower';
-	$.ajax({
-		type: "POST",
-		url: "../class/add/add",
-		data: data,
-		dataType: 'json'
-	})
-	.done(function(data){
-		
-		if(data.response == 1)
-		{
-			toastr.success(data.message);
-			$(".borrowitem").select2('val', 'All');
-			$("select[name='borrow_membername']").select2('val', 'All');
-			$.get('../views/printBorrow?borrowIds=' + data.borrowIds, function(htmlData){
-	            var w = window.open();
-	            w.document.write(htmlData);
-	            w.setTimeout(function(){
-	                w.print();  
-	                w.close();
-	            },250);
-	        });
-		}
-		else
-		{
-			toastr.error(data.message);
-		}
-	});
+$(".frm_borrow").submit(function (e) {
+  e.preventDefault();
+  var data = $(this).serialize() + "&key=add_borrower";
+  $.ajax({
+    type: "POST",
+    url: "../class/add/add",
+    data: data,
+    dataType: "json",
+  }).done(function (data) {
+    if (data.response == 1) {
+      toastr.success(data.message);
+      $(".borrowitem").select2("val", "All");
+      $("select[name='borrow_membername']").select2("val", "All");
+      $.get(
+        "../views/printBorrow?borrowIds=" + data.borrowIds,
+        function (htmlData) {
+          var w = window.open();
+          w.document.write(htmlData);
+          w.setTimeout(function () {
+            w.print();
+            w.close();
+          }, 250);
+        }
+      );
+    } else {
+      toastr.error(data.message);
+    }
+  });
 });
 
+$(".frmadd_users").submit(function (e) {
+  e.preventDefault();
+  var data = $(this).serialize() + "&key=add_users";
 
-$('.frmadd_users').submit(function(e){
-	e.preventDefault();
-	var data = $(this).serialize()+'&key=add_users';
-
-	$.ajax({
-		type: "POST",
-		url: "../class/add/add",
-		data: data
-	})
-	.done(function(data){
-		console.log(data);
-		if(data == 1){
-			toastr.success('Successfully added.');
-			table_user.ajax.reload(null,false);
-			$('.user-side').toggle(effect, options, duration);
-			$('.frmadd_users').find('input select').val('');
-		}else if(data == 2){
-			toastr.warning('Name or username already taken');
-		}else{
-			toastr.error('Failed to add');
-		}
-	});
-
+  $.ajax({
+    type: "POST",
+    url: "../class/add/add",
+    data: data,
+  }).done(function (data) {
+    console.log(data);
+    if (data == 1) {
+      toastr.success("Successfully added.");
+      table_user.ajax.reload(null, false);
+      $(".user-side").toggle(effect, options, duration);
+      $(".frmadd_users").find("input select").val("");
+    } else if (data == 2) {
+      toastr.warning("Name or username already taken");
+    } else {
+      toastr.error("Failed to add");
+    }
+  });
 });
 
-$('.client_reservation').submit(function(e){
-	e.preventDefault();
-	var frmdata = $(this).serialize()+'&key=addclient_reservation';
+$(".client_reservation").submit(function (e) {
+  e.preventDefault();
+  var frmdata = $(this).serialize() + "&key=addclient_reservation";
 
-	$.ajax({
-		type: "POST",
-		url: "../class/add/add",
-		data: frmdata
-	})
-	.done(function(data){
-		console.log(data);
-		if(data == 1){
-			toastr.success('Successful. Check your reservation status if your reservation was accomodated');
-			$('input[name="reserved_date"]').val('');
-			$('input[name="reserved_time"]').val('');
-			$('select[name="reserve_room"]').val('');
-			$(".client_reservation").find('select').select2('val', 'All');
-			tbl_pendingres.ajax.reload(null,false);
-
-		}else if(data == 2){
-			toastr.warning('Your reservation cannot process. You can only make one reservation per day.');
-			$('input[name="reserved_date"]').val('');
-			$('input[name="reserved_time"]').val('');
-			$('select[name="reserve_room"]').val('');
-			$(".client_reservation").find('select').select2('val', 'All');
-			tbl_pendingres.ajax.reload(null,false);
-		}else{
-			toastr.error('Your reservation cannot process right now.');
-		}
-	});
-
+  $.ajax({
+    type: "POST",
+    url: "../class/add/add",
+    data: frmdata,
+  }).done(function (data) {
+    console.log(data);
+    if (data == 1) {
+      toastr.success(
+        "Successful. Check your reservation status if your reservation was accomodated"
+      );
+      $('input[name="reserved_date"]').val("");
+      $('input[name="reserved_time"]').val("");
+      $('select[name="reserve_room"]').val("");
+      $(".client_reservation").find("select").select2("val", "All");
+      tbl_pendingres.ajax.reload(null, false);
+    } else if (data == 2) {
+      toastr.warning(
+        "Your reservation cannot process. You can only make one reservation per day."
+      );
+      $('input[name="reserved_date"]').val("");
+      $('input[name="reserved_time"]').val("");
+      $('select[name="reserve_room"]').val("");
+      $(".client_reservation").find("select").select2("val", "All");
+      tbl_pendingres.ajax.reload(null, false);
+    } else {
+      toastr.error("Your reservation cannot process right now.");
+    }
+  });
 });
 
-$('.room_reservation').submit(function(e){
-	e.preventDefault();
-	var frmdata = $(this).serialize()+'&key=addroom_reservation';
+$(".room_reservation").submit(function (e) {
+  e.preventDefault();
+  var frmdata = $(this).serialize() + "&key=addroom_reservation";
 
-	$.ajax({
-		type: "POST",
-		url: "../class/add/add",
-		data: frmdata
-	})
-	.done(function(data){
-		console.log(data);
-		if(data == 1){
-			toastr.success('Successful. Check your reservation status if your reservation was accomodated');
-			$('input[name="reserved_date"]').val('');
-			$('input[name="reserved_time"]').val('');
-			$('select[name="reserve_room"]').val('');
-			$(".room_reservation").find('select').select2('val', 'All');
-			room_tbl_pendingres.ajax.reload(null,false);
-			room_tbl_reserved.ajax.reload(null,false);
-
-		}else if(data == 2){
-			toastr.warning('Your reservation cannot process. You can only make one reservation per day.');
-			$('input[name="reserved_date"]').val('');
-			$('input[name="reserved_time"]').val('');
-			$('select[name="reserve_room"]').val('');
-			$(".room_reservation").find('select').select2('val', 'All');
-			room_tbl_pendingres.ajax.reload(null,false);
-			room_tbl_reserved.ajax.reload(null,false);
-		}else{
-			toastr.error('Your reservation cannot process right now.');
-		}
-	});
-
+  $.ajax({
+    type: "POST",
+    url: "../class/add/add",
+    data: frmdata,
+  }).done(function (data) {
+    console.log(data);
+    if (data == 1) {
+      toastr.success(
+        "Successful. Check your reservation status if your reservation was accomodated"
+      );
+      $('input[name="reserved_date"]').val("");
+      $('input[name="reserved_time"]').val("");
+      $('select[name="reserve_room"]').val("");
+      $(".room_reservation").find("select").select2("val", "All");
+      room_tbl_pendingres.ajax.reload(null, false);
+      room_tbl_reserved.ajax.reload(null, false);
+    } else if (data == 2) {
+      toastr.warning(
+        "Your reservation cannot process. You can only make one reservation per day."
+      );
+      $('input[name="reserved_date"]').val("");
+      $('input[name="reserved_time"]').val("");
+      $('select[name="reserve_room"]').val("");
+      $(".room_reservation").find("select").select2("val", "All");
+      room_tbl_pendingres.ajax.reload(null, false);
+      room_tbl_reserved.ajax.reload(null, false);
+    } else {
+      toastr.error("Your reservation cannot process right now.");
+    }
+  });
 });
 
-$('.add_student').click(function(){
-	
-	$('.divedit-member').toggle(effect, options, duration);
+$(".add_student").click(function () {
+  $(".divedit-member").toggle(effect, options, duration);
 
-	var form = '<form class="frm_add_student">\
+  var form =
+    '<form class="frm_add_student">\
 					<br/><br/><h4 class=""></h4>\
 					<hr>\
 					<div class="form-group">\
@@ -423,43 +445,39 @@ $('.add_student').click(function(){
 					</div>\
 				</form>';
 
-		$('.member-form').html(form);
-		$('.btn_frm_add').click(function(e){
-			$('.divedit-member').toggle(effect, options, duration);
-		});
+  $(".member-form").html(form);
+  $(".btn_frm_add").click(function (e) {
+    $(".divedit-member").toggle(effect, options, duration);
+  });
 
-		$('.frm_add_student').submit(function(e){
-			e.preventDefault();
-			var frmdata = $(this).serialize()+'&key=add_newstudent';
+  $(".frm_add_student").submit(function (e) {
+    e.preventDefault();
+    var frmdata = $(this).serialize() + "&key=add_newstudent";
 
-			$.ajax({
-				type: "POST",
-				url: "../class/add/add",
-				data: frmdata
-			})
-			.done(function(data){
-				// console.log(data);
-				if(data == 1){
-					toastr.success('Student successfully added.');
-					$('.btn_frm_add').click();
-					table_member.ajax.reload(null,false);
-					
-				}else if(data == 2){
-					toastr.warning('Student already exist.');
-				}else{
-					toastr.error('Failed to add.');
-				}
-			});
-
-		});
-
+    $.ajax({
+      type: "POST",
+      url: "../class/add/add",
+      data: frmdata,
+    }).done(function (data) {
+      // console.log(data);
+      if (data == 1) {
+        toastr.success("Student successfully added.");
+        $(".btn_frm_add").click();
+        table_member.ajax.reload(null, false);
+      } else if (data == 2) {
+        toastr.warning("Student already exist.");
+      } else {
+        toastr.error("Failed to add.");
+      }
+    });
+  });
 });
 
-$('.add_faculty').click(function(){
-	
-	$('.divedit-member').toggle(effect, options, duration);
+$(".add_faculty").click(function () {
+  $(".divedit-member").toggle(effect, options, duration);
 
-	var mform = '<form class="add_frm_faculty">\
+  var mform =
+    '<form class="add_frm_faculty">\
 					<br/><br/><h4 class=""></h4>\
 					<hr>\
 					<div class="form-group">\
@@ -501,39 +519,32 @@ $('.add_faculty').click(function(){
 					</div>\
 				</form>';
 
-		$('.member-form').html(mform);
+  $(".member-form").html(mform);
 
-		$('.btn_frm_add').click(function(e){
-			$('.divedit-member').toggle(effect, options, duration);
-		});
+  $(".btn_frm_add").click(function (e) {
+    $(".divedit-member").toggle(effect, options, duration);
+  });
 
-		$('.add_frm_faculty').submit(function(e){
-			e.preventDefault();
-			var frmdata = $(this).serialize()+'&key=add_newfaculty';
+  $(".add_frm_faculty").submit(function (e) {
+    e.preventDefault();
+    var frmdata = $(this).serialize() + "&key=add_newfaculty";
 
-			$.ajax({
-				type: "POST",
-				url: "../class/add/add",
-				data: frmdata
-			})
-			.done(function(data){
-				// console.log(data);
-				if(data == 1){
-					toastr.success('Faculty successfully added.');
-					$('.btn_frm_add').click();
-					table_member.ajax.reload(null,false);
-					
-				}else if(data == 2){
-					toastr.warning('Faculty already exist.');
-				}else{
-						toastr.success('Faculty successfully added.');
-					table_member.ajax.reload(null,false);
-				}
-			});
-
-		});
-
+    $.ajax({
+      type: "POST",
+      url: "../class/add/add",
+      data: frmdata,
+    }).done(function (data) {
+      // console.log(data);
+      if (data == 1) {
+        toastr.success("Faculty successfully added.");
+        $(".btn_frm_add").click();
+        table_member.ajax.reload(null, false);
+      } else if (data == 2) {
+        toastr.warning("Faculty already exist.");
+      } else {
+        toastr.success("Faculty successfully added.");
+        table_member.ajax.reload(null, false);
+      }
+    });
+  });
 });
-
-
-

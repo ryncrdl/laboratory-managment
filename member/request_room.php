@@ -80,8 +80,8 @@ include 'header.php';
 								<div class="form-group">
 									<label class="col-md-3 control-label" for="message">Time</label>
 									<div class="col-md-9">
-										<input type="time" placeholder="" class="form-control" name="reserved_time"
-											required="required">
+										<input type="time" placeholder="" class="form-control" id="reserved_time"
+											name="reserved_time" required="required">
 										<input type="hidden" name="client_id"
 											value="<?php echo $_SESSION['member_id']; ?>">
 									</div>
@@ -118,12 +118,27 @@ include 'header.php';
 <?php include 'footer.php'; ?>
 
 <script type="text/javascript">
+	const timeInput = document.getElementById('reserved_time');
+
+	// Define the minimum and maximum time
+	const minTime = '07:00';
+	const maxTime = '22:00';
+
+	timeInput.addEventListener('input', function () {
+		const value = timeInput.value;
+
+		// Validate the selected time
+		if (value < minTime || value > maxTime) {
+			toastr.error("Please select a time between 7:00am and 10:00pm.", 'Error');
+			timeInput.value = ''; // Clear the invalid input
+		}
+	});
 	$(document).ready(function () {
 		$("#timeLimit").datetimepicker({
 			// minTime: '<?php echo date("H:i"); ?>',
 			// maxTime: '18:00',
 			minTime: '07:00',
-			maxTime: '21:00',
+			maxTime: '22:00',
 			minDate: 0,
 			format: 'Y-m-d h:i A',
 			step: 15
