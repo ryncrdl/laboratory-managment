@@ -1784,6 +1784,39 @@ var tbluser_reservation = $(".tbluser_reservation").DataTable({
   ],
 });
 
+var tbluser_room_reservation = $(".tbluser_room_reservation").DataTable({
+  ajax: {
+    url: "../class/display/display",
+    type: "POST",
+    data: {
+      key: "tbluser_room_reservation",
+    },
+  },
+  columns: [
+    {
+      data: [0],
+      className: "text-center",
+    },
+    {
+      data: [1],
+      className: "text-center",
+    },
+    {
+      data: [2],
+      className: "text-center",
+    },
+    {
+      data: [3],
+      className: "text-center",
+    },
+    {
+      data: [4],
+      className: "text-center",
+    },
+  ],
+  dom: "Bfrtip",
+});
+
 var table_history = $(".table_history").DataTable({
   ajax: {
     url: "../class/display/display",

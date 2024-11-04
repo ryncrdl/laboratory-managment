@@ -891,6 +891,64 @@ class display
 		}
 	}
 
+	public function tbluser_room_reservation()
+	{
+		global $conn;
+		session_start();
+
+		// Enable error reporting for debugging
+		error_reporting(E_ALL);
+		ini_set('display_errors', 1);
+
+		$session = $_SESSION['member_id'];
+
+		// Use parameterized query to prevent SQL injection
+		$sql = $conn->prepare('SELECT * FROM room_reservation WHERE m_school_id = ?');
+		$sql->execute([$session]);
+
+		$fetch = $sql->fetchAll();
+		$count = $sql->rowCount();
+
+		$data = ['data' => []]; // Initialize $data
+
+		if ($count > 0) {
+			foreach ($fetch as $key => $value) {
+				// Determine reservation status
+				if ($value['status'] == 0) {
+					$status = 'Pending';
+				} else if ($value['status'] == 1) {
+					$status = 'Accepted';
+				} else if ($value['status'] == 2) {
+					$status = 'Cancelled';
+				}
+
+				// Format the date and time
+				$date = date('F d, Y H:i:s A', strtotime($value['reserve_date'] . ' ' . $value['reservation_time']));
+
+				// Append the reservation data to the array
+				$data['data'][] = [
+					$date,
+					$value['reservation_time'],
+					$value['assign_room'],
+					$status,
+					$value['remarks']
+				];
+			}
+		}
+
+		// Convert the data to JSON format and log it
+		$jsonResponse = json_encode($data);
+
+		if ($jsonResponse === false) {
+			// Handle JSON encoding errors
+			echo json_last_error_msg(); // Output the error message
+		} else {
+			// Output the JSON response
+			echo $jsonResponse;
+		}
+	}
+
+
 	public function chart_borrow()
 	{
 		global $conn;
@@ -1256,6 +1314,7 @@ class display
 	public function loadReservationsJSON()
 	{
 		global $conn;
+		$roomReservation = $conn->prepare('SELECT * FROM room_reservation WHERE status = ?');
 		$sql = $conn->prepare('SELECT *, GROUP_CONCAT(item.i_category,  "") item_borrow FROM reservation
 								 	LEFT JOIN item_stock ON item_stock.id = reservation.stock_id
 								 	LEFT JOIN item ON item.id = item_stock.item_id
@@ -1263,12 +1322,17 @@ class display
 								 	LEFT JOIN room ON room.id = reservation.assign_room
 								 	WHERE reservation.status = ? GROUP BY reservation.reservation_code');
 		$sql->execute(array(1));
+		$roomReservation->execute(array(1));
+
 		$fetch = $sql->fetchAll();
 		$count = $sql->rowCount();
+
+		$roomfetch = $roomReservation->fetchAll();
+		$roomcount = $roomReservation->rowCount();
+
 		$reserveArr = array();
 		if ($count > 0) {
 			foreach ($fetch as $reservation) {
-				http://localhost/laboratory-managment/views/user
 				$reserveArr[] = array(
 					"title" => $reservation['item_borrow'] . " " . ucwords($reservation['rm_name']),
 					"allDay" => false,
@@ -1277,6 +1341,19 @@ class display
 					"borderColor" => "#0073b7",
 					"url" => "../views/reservation"
 				);
+			}
+
+			if ($roomcount > 0) {
+				foreach ($roomfetch as $room) {
+					$reserveArr[] = array(
+						"title" => ucwords($room['assign_room']),
+						"allDay" => false,
+						"start" => date("Y-m-d H:i:s", strtotime($room['reserve_date'] . ' ' . $room['reservation_time'])),
+						"backgroundColor" => "#FF0000",
+						"borderColor" => "#FF0000",
+						"url" => "../views/reservation"
+					);
+				}
 			}
 
 			echo json_encode($reserveArr);
@@ -1307,6 +1384,52 @@ class display
 			echo json_encode($val);
 		}
 	}
+
+	public function attendanceData()
+	{
+		global $conn;
+
+		// Select department names, attendance counts, and time_in values
+		$sql = $conn->prepare('SELECT m_department AS department, time_in AS time_date, COUNT(*) AS value FROM attendance GROUP BY m_department');
+		$sql->execute();
+
+		$get = $sql->fetchAll();
+		$val = [];
+
+		// Check if there's data, otherwise initialize with zero values
+		if ($sql->rowCount() > 0) {
+			foreach ($get as $value) {
+				// Convert the time_in to DateTime object with the correct format
+				$convertDate = DateTime::createFromFormat('m/d/y h:i A', $value['time_date']);
+
+				// Format date only if conversion is successful
+				if ($convertDate) {
+					$formattedYear = $convertDate->format('Y');
+					$formattedMonth = $convertDate->format('m');
+					$formattedDay = $convertDate->format('d');
+				} else {
+					$formattedYear = $formattedMonth = $formattedDay = null;
+				}
+
+				$val[] = array(
+					'm_department' => $value['department'],
+					'value' => $value['value'],
+					'year' => $formattedYear,
+					'month' => $formattedMonth,
+					'day' => $formattedDay
+				);
+			}
+		} else {
+			// No attendance data exists, return an empty array with default values
+			$val[] = array(
+				'm_department' => 'No Data',
+				'value' => 0
+			);
+		}
+
+		echo json_encode($val);
+	}
+
 }
 
 $display = new display();
@@ -1418,6 +1541,10 @@ switch ($key) {
 		$display->tbluser_reservation();
 		break;
 
+	case 'tbluser_room_reservation';
+		$display->tbluser_room_reservation();
+		break;
+
 	case 'chart_borrow';
 		$display->chart_borrow();
 		break;
@@ -1495,6 +1622,11 @@ switch ($key) {
 	case 'chart_frequency';
 		$display->chartFrequency();
 		break;
+
+	case 'attendance_data';
+		$display->attendanceData();
+		break;
+
 
 	case 'count_due_borrow';
 		$display->count_due_borrow();

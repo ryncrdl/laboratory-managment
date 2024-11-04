@@ -26,7 +26,7 @@ include 'header.php';
 				<svg class="glyph stroked female user">
 					<use xlink:href="#stroked-female-user" />
 				</svg>
-				Reservation Status
+				Item Reservation
 			</a>
 		</li>
 		<li>
@@ -47,9 +47,13 @@ include 'header.php';
 
 
 			<div class="row">
-				<div class="col-lg-12">
-					<h1 class="page-header">Reservation</h1>
+				<div class="col-lg-12" style="display: flex; justify-content: space-between;">
+					<h1 class="page-header">Item Reservation</h1>
+					<a href="request_room"
+						style="margin-top: 4rem; height: 4rem; padding: 1rem 2rem; background: #800000; color: white; border-radius: 0.5rem;">Request
+						Room</a>
 				</div>
+
 			</div><!--/.row-->
 
 			<div class="row">
@@ -89,7 +93,7 @@ include 'header.php';
 								<div class="form-group">
 									<label class="col-md-3 control-label">Select Room</label>
 									<div class="col-md-9">
-										<select class="form-control" name="reserve_room" required></select>
+										<select class="form-control" name="item_reserve_room" required></select>
 									</div>
 								</div>
 								<div class="form-group">
@@ -103,8 +107,8 @@ include 'header.php';
 								<!-- Form actions -->
 								<div class="form-group">
 									<div class="col-md-12 widget-right">
-										<button type="submit" class="btn btn-primary btn-md pull-right">Make
-											Reservation</button>
+										<button type="submit" class="btn btn-primary btn-md pull-right">Reserve
+											Item</button>
 									</div>
 								</div>
 							</fieldset>

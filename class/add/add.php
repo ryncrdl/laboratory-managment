@@ -598,7 +598,7 @@ switch ($key) {
 		$date = $_POST['reserved_date'];
 		$time = $_POST['reserved_time'];
 		$client_id = $_POST['client_id'];
-		$assign_room = $_POST['reserve_room'];
+		$assign_room = $_POST['item_reserve_room'];
 		$timeLimit = $_POST['time_limit'];
 		$add_function->addclient_reservation($items, $date, $time, $client_id, $assign_room, $timeLimit);
 		break;

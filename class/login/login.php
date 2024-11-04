@@ -40,6 +40,8 @@ class login
 	{
 		global $conn;
 
+		date_default_timezone_set('Asia/Manila');
+
 		$sql = $conn->prepare('SELECT * FROM member WHERE m_school_id = ? AND m_password = ? AND m_status = ?');
 		$sql->execute(array($id, $m_password, 1));
 		$count = $sql->rowCount();
@@ -47,16 +49,46 @@ class login
 
 		if ($count > 0) {
 
+			// Start session and set session variables
 			session_start();
 			$_SESSION['member_id'] = $fetch['id'];
 			$_SESSION['member_name'] = $fetch['m_fname'] . " " . $fetch['m_lname'];
 			$_SESSION['member_type'] = $fetch['m_type'];
+			$_SESSION['m_school_id'] = $fetch['m_school_id'];
+
+			// Format today's date in the format to match 'time_in'
+			$today = date('m/d/y');
+
+			// Check if attendance for today already exists
+			$attendance_sql = $conn->prepare('SELECT * FROM attendance WHERE m_school_id = ? AND time_in LIKE ?');
+			$attendance_sql->execute(array($fetch['m_school_id'], "$today%"));
+
+			if ($attendance_sql->rowCount() == 0) {
+				// No entry for today, so we insert a new attendance record
+				$schoolId = $fetch['m_school_id'];
+				$firstName = $fetch['m_fname'];
+				$lastName = $fetch['m_lname'];
+				$department = $fetch['m_department'];
+				$yearSection = $fetch['m_year_section'];
+				$type = $fetch['m_type'];
+
+				$timeIn = new DateTime();
+				$current_date_time = $timeIn->format('m/d/y h:i a');
+
+				$timeOut = clone $timeIn;
+				$timeOut->modify('+5 minutes');
+				$current_date_time_out = $timeOut->format('m/d/y h:i a');
+
+				$insert_sql = $conn->prepare('INSERT INTO attendance (m_school_id, m_fname, m_lname, m_type, m_department, year_section, time_in, time_out) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+				$insert_sql->execute(array($schoolId, $firstName, $lastName, $type, $department, $yearSection, $current_date_time, $current_date_time_out));
+			}
+
 			echo "1";
 		} else {
 			echo "0";
 		}
-
 	}
+
 	public function member_forgot_password($id, $m_email)
 	{
 		global $conn;

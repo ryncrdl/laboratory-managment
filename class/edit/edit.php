@@ -527,7 +527,7 @@ class edit
 	{
 		global $conn;
 
-		session_start();
+		// session_start();
 		$sessionid = $_SESSION['admin_id'];
 
 		$up = $conn->prepare('UPDATE room_reservation SET status = ? WHERE reservation_code = ? ');
