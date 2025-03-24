@@ -148,7 +148,7 @@ include 'header.php';
                         <svg class="glyph stroked line-graph">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#stroked-line-graph" />
                         </svg>
-                        Attadance Graph
+                        Attendance Graph
                     </a>
                 </li>
             </ul>
@@ -242,10 +242,16 @@ include 'header.php';
                     <table class="table table-bordered table-striped" id="attendanceTable">
                         <thead>
                             <tr>
+                                <th style="padding: 1rem;">School ID</th>
+                                <th style="padding: 1rem;">Name</th>
+                                <th style="padding: 1rem;">Yr-Sec</th>
                                 <th style="padding: 1rem;">Department</th>
-                                <th style="padding: 1rem;">Attendance Count</th>
-                                <th style="padding: 1rem;">Year</th>
+                                <!-- <th style="padding: 1rem;">Attendance Count</th> -->
+                                <th style="padding: 1rem;">Time in</th>
+                                <th style="padding: 1rem;">Time out</th>
                                 <th style="padding: 1rem;">Month</th>
+                                <th style="padding: 1rem;">Day</th>
+                                <th style="padding: 1rem;">Year</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -271,17 +277,17 @@ include 'header.php';
         }
     })
         .done(function (data) {
-            console.log("Raw data from server:", data);
+            // console.log("Raw data from server:", data);
 
             try {
-                provider = JSON.parse(data);
-                console.log("Parsed data for chart:", provider);
+                const provider = JSON.parse(data);
+                // console.log("Parsed data for chart:", provider);
 
                 // Populate filters based on the data
-                populateFilters(provider);
+                populateFilters(provider.count);
 
-                // Initial render of the chart
-                renderChart(provider);
+                // // Initial render of the chart
+                renderChart(provider.count);
 
             } catch (error) {
                 console.error("Error parsing JSON:", error);
@@ -342,10 +348,12 @@ include 'header.php';
             $('#filterYear').append(new Option(year, year));
         });
         const uniqueDepartments = [...departments]; // Convert Set to Array
-        console.log(departments)
+        // console.log(departments)
         uniqueDepartments.forEach(department => {
             $('#filterDepartment').append(new Option(department, department));
         });
+
+
     }
 
 
@@ -359,15 +367,25 @@ include 'header.php';
         const selectedDepartment = $('#filterDepartment').val();
 
         // Filter the data based on selected filters
-        const filteredData = provider.filter(item => {
+        const filteredData = provider.count.filter(item => {
             return (!selectedYear || item.year === selectedYear) &&
                 (!selectedMonth || item.month === selectedMonth) &&
                 (!selectedDepartment || item.m_department === selectedDepartment);
         });
 
+
+        const filteredTableData = provider.data.filter(item => {
+            return (!selectedYear || item.data.year === selectedYear) &&
+                (!selectedMonth || item.data.month === selectedMonth) &&
+                (!selectedDepartment || item.data.m_department === selectedDepartment);
+        });
+
         // Update the chart data
         chart.dataProvider = filteredData;
-        chart.validateData(); // Refresh the chart
+        chart.validateData(); // Refresh the chart'
+
+        const data = { data: filteredTableData }
+        populateTable(data);
     }
 
 
@@ -375,13 +393,20 @@ include 'header.php';
         const tableBody = $('#attendanceTable tbody');
         tableBody.empty(); // Clear existing rows
 
-        data.forEach(item => {
+        const attendance = data.data || []
+
+        attendance.forEach(item => {
             const row = `<tr>
-            <td>${item.m_department}</td>
-            <td>${item.value}</td>
-            <td>${item.year}</td>
-            <td>${identifyMonth(item.month)}</td>
-        </tr>`;
+                <td>${item.data.m_school_id}</td>
+                <td>${item.data.full_name}</td>
+                <td>${item.data.year_section}</td>
+                <td>${item.data.m_department}</td>
+                <td>${item.data.time_in}</td>
+                <td>${item.data.time_out}</td>
+                <td>${identifyMonth(item.data.month)}</td>
+                <td>${item.data.day}</td>
+                <td>${item.data.year}</td>
+            </tr>`;
             tableBody.append(row);
         });
     }
@@ -395,17 +420,17 @@ include 'header.php';
         }
     })
         .done(function (data) {
-            console.log("Raw data from server:", data);
+            // console.log("Raw data from server:", data);
 
             try {
                 provider = JSON.parse(data);
-                console.log("Parsed data for chart:", provider);
+                // console.log("Parsed data for chart:", provider);
 
                 // Populate filters based on the data
                 // populateFilters(provider);
 
                 // Initial render of the chart
-                renderChart(provider);
+                renderChart(provider.count);
 
                 // Populate the table with the same data
                 populateTable(provider);

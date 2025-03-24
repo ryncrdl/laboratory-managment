@@ -1390,17 +1390,21 @@ class display
 		global $conn;
 
 		// Select department names, attendance counts, and time_in values
-		$sql = $conn->prepare('SELECT m_department AS department, time_in AS time_date, COUNT(*) AS value FROM attendance GROUP BY m_department');
+		$sqlData = $conn->prepare('SELECT * FROM attendance');
+		$sql = $conn->prepare('SELECT *, COUNT(*) AS value FROM attendance GROUP BY m_department');
 		$sql->execute();
+		$sqlData->execute();
 
 		$get = $sql->fetchAll();
+		$getData = $sqlData->fetchAll();
 		$val = [];
+		$valData = [];
 
 		// Check if there's data, otherwise initialize with zero values
 		if ($sql->rowCount() > 0) {
 			foreach ($get as $value) {
 				// Convert the time_in to DateTime object with the correct format
-				$convertDate = DateTime::createFromFormat('m/d/y h:i A', $value['time_date']);
+				$convertDate = DateTime::createFromFormat('m/d/y h:i A', $value['time_in']);
 
 				// Format date only if conversion is successful
 				if ($convertDate) {
@@ -1412,22 +1416,46 @@ class display
 				}
 
 				$val[] = array(
-					'm_department' => $value['department'],
+					'm_department' => $value['m_department'],
 					'value' => $value['value'],
 					'year' => $formattedYear,
 					'month' => $formattedMonth,
-					'day' => $formattedDay
+					'day' => $formattedDay,
 				);
 			}
 		} else {
 			// No attendance data exists, return an empty array with default values
 			$val[] = array(
 				'm_department' => 'No Data',
-				'value' => 0
+				'value' => 0,
 			);
 		}
 
-		echo json_encode($val);
+		if ($sqlData->rowCount() > 0) {
+			foreach ($getData as $value) {
+				$convertDate = DateTime::createFromFormat('m/d/y h:i A', $value['time_in']);
+
+				// Format date only if conversion is successful
+				if ($convertDate) {
+					$formattedYear = $convertDate->format('Y');
+					$formattedMonth = $convertDate->format('m');
+					$formattedDay = $convertDate->format('d');
+				} else {
+					$formattedYear = $formattedMonth = $formattedDay = null;
+				}
+
+				$data = ['m_school_id' => $value['m_school_id'], 'full_name' => $value['m_fname'] . ' ' . $value['m_lname'], 'm_department' => $value['m_department'], 'year_section' => $value['year_section'], 'time_in' => $value['time_in'], 'time_out' => $value['time_out'], 'year' => $formattedYear, 'month' => $formattedMonth, 'day' => $formattedDay];
+				$valData[] = array(
+					'data' => $data
+				);
+			}
+		} else {
+			$valData[] = array(
+				'data' => []
+			);
+		}
+
+		echo json_encode(['count' => $val, 'data' => $valData]);
 	}
 
 }
